@@ -1,2 +1,4 @@
-# tp_laboratorio_1
-Trabajo práctico N°1
+# Trabajo Práctico N°1 - Programación I
+
+Alumno: Lautaro Nicolás Díaz
+DNI: 39468894
