@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1567129967 source:c:\users\nicolas\desktop\programacion\labo-prog 1\labo-prog 1\tp1 - fecha --\tp_1_cascara\tp_1_cascara\main.c
+	<stdio.h>
+	<stdlib.h>
+	"funciones.h"
+
+1567129855 c:\users\nicolas\desktop\programacion\labo-prog 1\labo-prog 1\tp1 - fecha --\tp_1_cascara\tp_1_cascara\funciones.h
+
