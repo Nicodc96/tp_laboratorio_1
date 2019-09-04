@@ -62,22 +62,18 @@ float multiplicar(float primerOpe, float segundoOpe)
     return resultado;
 }
 
-float factorizacionUno(float primerOpe)
+float factorizacion(long double primerOpe)
 {
-    int i, factorOpe = 1;
-
-    for (i = 1; i <= primerOpe; i++)
+    long double i, factorOpe = 1;
+    if (primerOpe >= 0)
+    {
+        for (i = 1; i <= primerOpe; i++)
         factorOpe = factorOpe * i;
+    } else
+        {
+            factorOpe = -1;
+        }
 
     return factorOpe;
 }
 
-float factorizacionDos(float segundoOpe)
-{
-    int i, factorOpe = 1;
-
-    for (i = 1; i <= segundoOpe; i++)
-        factorOpe = factorOpe * i;
-
-    return factorOpe;
-}

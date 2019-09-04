@@ -1,3 +1,4 @@
+// [-std=c99] ACTIVADO
 
 int menu(float*, float*);
 
@@ -5,7 +6,7 @@ int menu(float*, float*);
  *
  * \param   Modifico los valores de los operandos en el menu segun vaya cambiando.
  * \param   Y devuelvo ese valor al switch.
- * \return Devuelvo la opcion seleccionada.
+ * \return  Finalmente, devuelvo la opcion seleccionada.
  *
  */
 
@@ -35,7 +36,7 @@ float restar(float, float);
   *
   * \param      Divido los operandos.
   * \param      Condiciono la divison si el divisor es igual a 0, que devolverá '-1' y mostrará el mensaje de error.
-  * \return Devuelvo el resultado.
+  * \return     Devuelvo el resultado.
   *
   */
 
@@ -49,24 +50,15 @@ float restar(float, float);
    *
    */
 
-   float factorizacionUno(float);
+   float factorizacion(long double);
 
-   /** \brief  Factorizar el numero 1.
+   /** \brief  Factorizar el operando correspondiente.
     *
+    * \param    Condiciono la funcion, preguntando si el factorial ingresado es un numero entero natural, sino devuelve -1.
     * \param    Realizo un loop con for() donde multiplico un valor base hasta que 'i' sea mayor que el numero ingresado.
-    * \param
     * \return   Devuelvo el resultado.
     *
     */
 
-    float factorizacionDos(float);
-
-    /** \brief Factorizar el numero 2.
-     *
-     * \param  Realizo un loop con for() donde multiplico un valor base hasta que 'i' sea mayor que el numero ingresado.
-     * \param
-     * \return Devuelvo el resultado.
-     *
-     */
 
 

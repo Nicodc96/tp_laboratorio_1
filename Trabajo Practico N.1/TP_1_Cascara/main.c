@@ -11,30 +11,28 @@ int main()
     float resta;
     float division;
     float multiplicacion;
-    float factoPrimer;
-    float factoSegundo;
+    long double factoPrimer;
+    long double factoSegundo;
     char seguir='s';
 
     do{
         switch(menu(&primerNum, &segundoNum))
         {
             case 1:
-                system("cls");
                 printf("Ingrese el Primer Operando: ");
                 scanf("%f", &primerNum);
-                printf("Primer numero ingresado: %.2f\n\n", primerNum);
+                system("cls");
                 break;
             case 2:
-                system("cls");
                 printf("Ingrese el Segundo Operando: ");
                 scanf("%f", &segundoNum);
-                printf("Primer numero ingresado: %.2f\n", primerNum);
-                printf("Segundo numero ingresado: %.2f\n\n", segundoNum);
+                system("cls");
                 break;
             case 3:
                 suma = sumar(primerNum, segundoNum);
                 printf("La suma de los operandos es: %.2f\n\n", suma);
                 printf("Volver al menu: s\nSalir: n\n\n");
+                fflush(stdin);
                 seguir = getch();
                 if (seguir == 's')
                     {
@@ -45,6 +43,7 @@ int main()
                 resta = restar(primerNum, segundoNum);
                 printf("La resta de los operandos es: %.2f\n\n", resta);
                 printf("Volver al menu: s\nSalir: n\n\n");
+                fflush(stdin);
                 seguir = getch();
                 if (seguir == 's')
                     {
@@ -61,6 +60,7 @@ int main()
                                 printf("La division de los operandos es: %.2f\n\n", division);
                             }
                 printf("Volver al menu: s\nSalir: n\n\n");
+                fflush(stdin);
                 seguir = getch();
                 if (seguir == 's')
                     {
@@ -71,6 +71,7 @@ int main()
                 multiplicacion = multiplicar(primerNum, segundoNum);
                 printf("La multiplicacion de los operandos es: %.2f\n\n", multiplicacion);
                 printf("Volver al menu: s\nSalir: n\n\n");
+                fflush(stdin);
                 seguir = getch();
                 if (seguir == 's')
                     {
@@ -78,10 +79,24 @@ int main()
                         break;
                     }
             case 7:
-                factoPrimer = factorizacionUno(primerNum);
-                factoSegundo = factorizacionDos(segundoNum);
-                printf("Factorial del primer Operando es: %.2f\nFactorial del segundo Operando es:  %.2f\n\n", factoPrimer, factoSegundo);
+                factoPrimer = factorizacion(primerNum);
+                factoSegundo = factorizacion(segundoNum);
+                if (factoPrimer == -1)
+                    {
+                        printf("No se puede realizar factorial de un numero negativo.\n");
+                    } else
+                    {
+                        printf("Factorial del primer Operando es: %.2Lf\n\n", factoPrimer); // [-std=c99] ACTIVADO
+                    }
+                if (factoSegundo == -1)
+                    {
+                        printf("No se puede realizar factorial de un numero negativo.\n");
+                    } else
+                        {
+                             printf("Factorial del segundo Operando es: %.2Lf\n\n", factoSegundo);
+                        }
                 printf("Volver al menu: s\nSalir: n\n\n");
+                fflush(stdin);
                 seguir = getch();
                 if (seguir == 's')
                     {
@@ -92,6 +107,46 @@ int main()
                             }
                 break;
             case 8:
+                suma = sumar(primerNum, segundoNum);
+                printf("La suma de los operandos es: %.2f\n", suma);
+                resta = restar(primerNum, segundoNum);
+                printf("La resta de los operandos es: %.2f\n", resta);
+                division = dividir(primerNum, segundoNum);
+                if (division == -1)
+                    {
+                        printf("No es posible dividir por 0.\n");
+                    } else
+                            {
+                                printf("La division de los operandos es: %.2f\n", division);
+                            }
+                multiplicacion = multiplicar(primerNum, segundoNum);
+                printf("La multiplicacion de los operandos es: %.2f\n", multiplicacion);
+                factoPrimer = factorizacion(primerNum);
+                factoSegundo = factorizacion(segundoNum);
+                if (factoPrimer == -1)
+                    {
+                        printf("No se puede realizar factorial de un numero negativo.\n");
+                    } else
+                    {
+                        printf("Factorial del primer Operando es: %.2Lf\n\n", factoPrimer); // [-std=c99] ACTIVADO
+                    }
+                if (factoSegundo == -1)
+                    {
+                        printf("No se puede realizar factorial de un numero negativo.\n");
+                    } else
+                        {
+                             printf("Factorial del segundo Operando es: %.2Lf\n\n", factoSegundo);
+                        }
+                printf("Volver al menu: s\nSalir: n\n\n");
+                fflush(stdin);
+                seguir = getch();
+                if (seguir == 's')
+                    {
+                        system("cls");
+                        break;
+                    } else {
+                            seguir = 'n';
+                            }
                 break;
             case 9:
                 seguir = 'n';
