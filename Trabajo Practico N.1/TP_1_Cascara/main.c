@@ -15,7 +15,7 @@ int main()
     long double factoSegundo;
     char seguir='s';
 
-    do{
+    while (seguir == 's'){
         switch(menu(&primerNum, &segundoNum))
         {
             case 1:
@@ -155,7 +155,7 @@ int main()
                 system("cls");
                 printf("\nOpcion seleccionada invalida, volviendo al menu.. \n\n");
         }
-        } while(seguir=='s');
+        }
 
     return 0;
 }
