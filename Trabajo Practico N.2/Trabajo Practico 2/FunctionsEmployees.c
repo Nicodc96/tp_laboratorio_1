@@ -21,30 +21,25 @@ int menu(){
 }
 
 int initEmployees(Employee employees[], int len){
+    int isOk = -1;
     for (int i = 0; i < len; i++){
         employees[i].isEmpty = 1;
+        isOk = 0;
     }
-    return 0;
+    return isOk;
 }
 
-int addEmployee(Employee employees[], int len, int id, char name[],char lastName[],float salary,int sector)
+Employee addEmployee(int id, char name[],char lastName[],float salary,int sector)
 {
     Employee newEmployee;
-    int isOk = -1;
 
-    for (int i = 0; i < len; i++){
-        if (employees[i].isEmpty == 1){
             newEmployee.id = id;
             strcpy(newEmployee.name, name);
             strcpy(newEmployee.lastName, lastName);
             newEmployee.salary = salary;
             newEmployee.sector = sector;
             newEmployee.isEmpty = 0;
-            isOk = 0;
-            break;
-        }
-    }
-    return isOk;
+    return newEmployee;
 }
 
 int searchEmpty(Employee employees[], int len){
@@ -58,22 +53,9 @@ int searchEmpty(Employee employees[], int len){
     return indice;
 }
 
-int searchEmployee(int id, Employee employees[], int len){
-    int indice = -1;
-        for(int i = 0; i < len; i++){
-         if (!employees[i].isEmpty && employees[i].id == id){
-          indice = i;
-          break;
-        }
-    }
-    return indice;
-}
-
-int newEmployee(Employee employees[], int len){
+int newEmployee(Employee employees[], int len, int id){
     int isOk = 0;
-    int available;
     int indice;
-    int id;
     int salary;
     int sector;
     int tries = 5;
@@ -88,18 +70,6 @@ int newEmployee(Employee employees[], int len){
     if (indice == -1){
         printf("Error. Nomina de Empleados completo, no es posible ingresar mas empleados.\n\n");
     }else{
-        printf("Ingrese el numero de ID (4 digitos): ");
-        scanf("%d", &id);
-        while (id < 9999 && tries > 0){
-            tries--;
-            printf("ID ingresado contiene demasiados digitos, reingrese: ");
-            scanf("%d", &id);
-        }
-        available = searchEmployee(id, employees, len);
-        if (available != -1){
-            printf("ID ya registrado.\n\n");
-            system("pause");
-        } else{
         while (checkIn == 'g'){
         printf("Ingrese el nombre del Empleado(maximo 50 caracteres): ");
         fflush(stdin);
@@ -141,10 +111,90 @@ int newEmployee(Employee employees[], int len){
             scanf("%d", &sector);
             }
         }
-        }
-        employees[indice] = addEmployee(employees, len, id, name, lastName, salary, sector);
+        employees[indice] = addEmployee(id, name, lastName, salary, sector);
         printf("Empleado ingresado al sistema exitosamente.\n\n");
         isOk = 1;
+        }
+    return isOk;
+}
+
+void findEmployeeById(Employee employees[], int len, int id){
+    int flag = 0;
+    int auxID;
+    system("cls");
+    printf("------  EMPLEADOS | ID  ------\n\n");
+    printf("Ingrese el ID del empleado: ");
+    scanf("%d", &auxID);
+    for (int i = 0; i < len; i++){
+        if (employees[i].id == auxID){
+            printEmployees(employees[i]);
+            flag = 1;
+        }
     }
+    if (flag == 0){
+        printf("cls");
+        printf("No se ha encontrado el empleado con el ID ingresado.\n");
+    }
+}
+
+void printEmployees(Employee employeeX){
+    printf("%d   %10s      %10s    %.2f   %d",
+           employeeX.id,
+           employeeX.name,
+           employeeX.lastName,
+           employeeX.salary,
+           employeeX.sector);
+}
+
+int removeEmployee(Employee employees[], int len, int id){
+    int seguir = 0;
+    char resp;
+    int indice;
+    int auxID;
+
+    system("cls");
+    printf("------  BAJAS | EMPLEADOS  ------\n\n");
+    printf("Ingrese el ID del empleado: ");
+    scanf("%d", &auxID);
+
+    indice = searchEmployee(auxID, employees, len);
+    if (indice == -1){
+        printf("ID inexistente en el sistema.\n\n");
+        system("pause");
+    } else{
+        printEmployees(employees[indice]);
+        printf("Confirma BAJA? (y/n): ");
+        fflush(stdin);
+        resp = getche();
+        if (resp == 's'){
+            employees[indice].isEmpty = 1;
+            printf("Se ha dado de baja correctamente el empleado del sistema.\n\n");
+            seguir = 1;
+        } else{
+            printf("Operacion cancelada.\n\n");
+        }
+    }
+    return seguir;
+}
+
+int searchEmployee(int id, Employee employees[], int len)
+{
+    int indice = -1;
+    for(int i = 0; i < len; i++)
+    {
+        if (!employees[i].isEmpty && employees[i].id == id)
+        {
+            indice = i;
+            break;
+        }
+    }
+    return indice;
+}
+
+int sortEmployees(Employee employees[], int len, int order){
+    int isOk = 0;
+
+
+
     return isOk;
 }

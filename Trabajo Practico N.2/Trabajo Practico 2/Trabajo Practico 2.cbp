@@ -31,8 +31,8 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="bibliotecaTP2.h" />
-		<Unit filename="funcionesTP2.c">
+		<Unit filename="ArrayEmployees.h" />
+		<Unit filename="FunctionsEmployees.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="main.c">

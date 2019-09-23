@@ -1,22 +1,24 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
-
 #include "ArrayEmployees.h"
+
 #define LEN 1000
 
 int main()
 {
     Employee listEmployee[LEN];
-    int checkEmployee;
+    int employeeID = 7000;
     char follow = 'n';
 
-    checkEmployee = initEmployees(listEmployee, LEN);
+    initEmployees(listEmployee, LEN);
 
     do{
         switch(menu()){
     case 'a':
-        printf("\n\nOPCION A\n\n");
+        if(newEmployee(listEmployee, LEN, employeeID)){
+            employeeID++;
+        }
         break;
     case 'b':
         printf("\n\nOPCION B\n\n");
