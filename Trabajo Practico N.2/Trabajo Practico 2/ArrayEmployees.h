@@ -12,7 +12,7 @@ int isEmpty;
 
 }Employee;
 #endif // ARRAYEMPLOYEES_H_INCLUDED
-
+int hardcodearEmpleados(Employee x[], int tam, int cantidad);
 /** \brief Option's Menu that the User can choose options "a","b","c","d" or "e".
  *  if other letter was choose, the function return default with the error message.
  *  if the options "a" or "b" was choose before enter any employee
@@ -45,7 +45,7 @@ int initEmployees(Employee employees[], int len);
 */
 Employee addEmployee(int id, char name[],char lastName[],float salary,int sector);
 
-/** \brief check if possible to add more values in the struct using for
+/** \brief check if possible to add more values in the struct
  *
  * \param Employee employees
  * \param int len
@@ -65,13 +65,13 @@ int searchEmpty(Employee employees[], int len);
 
 int newEmployee(Employee employees[], int len, int id);
 
-/** \brief find an Employee by Id and returns the index position in array.
+/** \brief
 *
 * \param Employee employees
 * \param int len
 * \param int id
-* \return Return employee index position or (0) if none employees found
-* with the correct error message.
+* \return
+*
 */
 void findEmployeeById(Employee employees[], int len, int id);
 
@@ -102,7 +102,7 @@ int removeEmployee(Employee employees[], int len, int id);
  * \return int return (0) if the user canceled the function, or (1) if
  * the employee was eliminated.
  */
-int searchEmployee(int id, Employee employees[], int len);
+int searchSpecificEmployee(int id, Employee employees[], int len);
 
 /** \brief Sort the elements in the array of employees, the argument order
 indicate UP or DOWN order
@@ -114,3 +114,17 @@ indicate UP or DOWN order
 *
 */
 int sortEmployees(Employee employees[], int len, int order);
+
+/** \brief Ask for ID and check if exist
+ *
+ * \param Employee employee[]
+ * \param int tam
+ * \return int return flag = (0) if ID does not exist, flag = (1) if Ok
+ * and call the function findEmployeeById
+ */
+
+int searchEmployee(Employee employee[], int tam);
+
+void modifyMenuCases(Employee employess[], int tam, int id);
+
+int modifyMenu();

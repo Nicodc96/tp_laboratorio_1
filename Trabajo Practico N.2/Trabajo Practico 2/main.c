@@ -13,6 +13,8 @@ int main()
 
     initEmployees(listEmployee, LEN);
 
+    employeeID = employeeID + hardcodearEmpleados(listEmployee, LEN, 5);
+
     do{
         switch(menu()){
     case 'a':
@@ -21,7 +23,7 @@ int main()
         }
         break;
     case 'b':
-        printf("\n\nOPCION B\n\n");
+        searchEmployee(listEmployee, LEN);
         break;
     case 'c':
         printf("\n\nOPCION C\n\n");
@@ -32,7 +34,12 @@ int main()
     case 'e':
         printf("\n\nConfirmar salida (y/n): ");
         fflush(stdin);
-        follow = getche();
+        follow = getchar();
+        while(follow != 'y' && follow != 'n'){
+            printf("\nOpcion incorrecta, ingrese (y/n): \n");
+            fflush(stdin);
+            follow = getchar();
+        }
         break;
     default:
         system("cls");
