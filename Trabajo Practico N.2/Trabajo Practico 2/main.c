@@ -17,56 +17,70 @@ int main()
     // Utilizar esta declaracion junto al prototipo y el desarrollo de la funcion si se desea testear rapidamente el TP
     // employeeID = employeeID + hardcodearEmpleados(listEmployee, LEN, 10);
 
-    do{
-        switch(menu()){
-    case 'a':
-        if(newEmployee(listEmployee, LEN, employeeID)){
-            employeeID++;
-        }
-        break;
-    case 'b':
-        checkTrue = checkEmployee(listEmployee, LEN);
-        if (checkTrue == 1){
-        modifyingEmployee(listEmployee, LEN);
-        } else {
-            printf("\nSe debe dar de ALTA al/los empleado(s) antes de realizar esta accion.\n");
-        }
-        break;
-    case 'c':
-        checkTrue = checkEmployee(listEmployee, LEN);
-        if (checkTrue == 1){
-        removingEmployee(listEmployee, LEN);
-        } else {
-            printf("\nSe debe dar de ALTA al/los empleado(s) antes de realizar esta accion.\n");
-        }
-        break;
-    case 'd':
-        checkTrue = checkEmployee(listEmployee, LEN);
-        if (checkTrue == 1){
-        reportEmployees(listEmployee, LEN);
-        } else {
-            printf("\nSe debe dar de ALTA al/los empleado(s) antes de realizar esta accion.\n");
-        }
-        break;
-    case 'e':
-        printf("\n\nConfirmar salida (y/n): ");
-        fflush(stdin);
-        follow = getchar();
-        printf("\n");
-        while(follow != 'y' && follow != 'n'){
-            printf("\nOpcion incorrecta, ingrese (y/n): \n");
+    do
+    {
+        switch(menu())
+        {
+        case 'a':
+            if(newEmployee(listEmployee, LEN, employeeID))
+            {
+                employeeID++;
+            }
+            break;
+        case 'b':
+            checkTrue = checkEmployee(listEmployee, LEN);
+            if (checkTrue == 1)
+            {
+                modifyingEmployee(listEmployee, LEN);
+            }
+            else
+            {
+                printf("\nSe debe dar de ALTA al/los empleado(s) antes de realizar esta accion.\n");
+            }
+            break;
+        case 'c':
+            checkTrue = checkEmployee(listEmployee, LEN);
+            if (checkTrue == 1)
+            {
+                removingEmployee(listEmployee, LEN);
+            }
+            else
+            {
+                printf("\nSe debe dar de ALTA al/los empleado(s) antes de realizar esta accion.\n");
+            }
+            break;
+        case 'd':
+            checkTrue = checkEmployee(listEmployee, LEN);
+            if (checkTrue == 1)
+            {
+                reportEmployees(listEmployee, LEN);
+            }
+            else
+            {
+                printf("\nSe debe dar de ALTA al/los empleado(s) antes de realizar esta accion.\n");
+            }
+            break;
+        case 'e':
+            printf("\n\nConfirmar salida (y/n): ");
             fflush(stdin);
             follow = getchar();
+            printf("\n");
+            while(follow != 'y' && follow != 'n')
+            {
+                printf("\nOpcion incorrecta, ingrese (y/n): \n");
+                fflush(stdin);
+                follow = getchar();
+            }
+            break;
+        default:
+            system("cls");
+            printf("Opcion elegida invalida, volviendo al menu...\n");
+            break;
         }
-        break;
-    default:
-        system("cls");
-        printf("Opcion elegida invalida, volviendo al menu...\n");
-        break;
-        }
-    printf("\n\n");
-    system("pause");
-    }while (follow == 'n');
+        printf("\n\n");
+        system("pause");
+    }
+    while (follow == 'n');
 
     return 0;
 }

@@ -34,7 +34,8 @@
 } */
 
 
-int menu(){
+int menu()
+{
     char option;
     system("cls");
 
@@ -47,12 +48,14 @@ int menu(){
     printf("Elija una opcion: ");
     fflush(stdin);
     option = getchar();
-        return option;
+    return option;
 }
 
-int initEmployees(Employee employees[], int len){
+int initEmployees(Employee employees[], int len)
+{
     int isOk = 0;
-    for (int i = 0; i < len; i++){
+    for (int i = 0; i < len; i++)
+    {
         employees[i].isEmpty = 1;
         isOk = 1;
     }
@@ -63,27 +66,31 @@ Employee addEmployee(int id, char name[],char lastName[],float salary,int sector
 {
     Employee newEmployee;
 
-            newEmployee.id = id;
-            strcpy(newEmployee.name, name);
-            strcpy(newEmployee.lastName, lastName);
-            newEmployee.salary = salary;
-            newEmployee.sector = sector;
-            newEmployee.isEmpty = 0;
+    newEmployee.id = id;
+    strcpy(newEmployee.name, name);
+    strcpy(newEmployee.lastName, lastName);
+    newEmployee.salary = salary;
+    newEmployee.sector = sector;
+    newEmployee.isEmpty = 0;
     return newEmployee;
 }
 
-int searchEmpty(Employee employees[], int len){
+int searchEmpty(Employee employees[], int len)
+{
     int indice = -1;
-        for(int i = 0; i < len; i++){
-         if (employees[i].isEmpty == 1){
-          indice = i;
-          break;
-         }
+    for(int i = 0; i < len; i++)
+    {
+        if (employees[i].isEmpty == 1)
+        {
+            indice = i;
+            break;
         }
+    }
     return indice;
 }
 
-int newEmployee(Employee employees[], int len, int id){
+int newEmployee(Employee employees[], int len, int id)
+{
     int isOk = 0;
     int flag = 0;
     int indice;
@@ -98,89 +105,105 @@ int newEmployee(Employee employees[], int len, int id){
     system("cls");
     printf("------  ALTAS | EMPLEADOS  ------\n\n");
     indice = searchEmpty(employees, len);
-    if (indice == -1){
+    if (indice == -1)
+    {
         printf("Error. Nomina de Empleados completo, no es posible ingresar mas empleados.\n\n");
-    }else{
-        while (checkIn == 'g' || flag == 0){
-        printf("Ingrese el nombre del Empleado(maximo 20 caracteres): ");
-        fflush(stdin);
-        gets(auxCad);
-        while(strlen(auxCad)>20 && tries > 0){
-            printf("Nombre demasiado largo. Maximo 20 caracteres! Reingrese nombre: ");
+    }
+    else
+    {
+        while (checkIn == 'g' || flag == 0)
+        {
+            printf("Ingrese el nombre del Empleado(maximo 20 caracteres): ");
             fflush(stdin);
             gets(auxCad);
-            tries--;
-        }
-        if (tries == 0){
-            printf("Demasiados intentos fallidos, cancelando operacion...\n\n");
-            checkIn = 'f';
-            break;
-        }
-        strcpy(name, auxCad);
-        printf("\n");
-        tries = 3;
+            while(strlen(auxCad)>20 && tries > 0)
+            {
+                printf("Nombre demasiado largo. Maximo 20 caracteres! Reingrese nombre: ");
+                fflush(stdin);
+                gets(auxCad);
+                tries--;
+            }
+            if (tries == 0)
+            {
+                printf("Demasiados intentos fallidos, cancelando operacion...\n\n");
+                checkIn = 'f';
+                break;
+            }
+            strcpy(name, auxCad);
+            printf("\n");
+            tries = 3;
 
-        printf("Ingrese el apellido del Empleado(maximo 20 caracteres): ");
-        fflush(stdin);
-        gets(auxCad);
-        while(strlen(auxCad)>20 && tries > 0){
-            printf("Apellido demasiado largo. Maximo 20 caracteres! Reingrese apellido: ");
+            printf("Ingrese el apellido del Empleado(maximo 20 caracteres): ");
             fflush(stdin);
             gets(auxCad);
-            tries--;
-        }
-        if (tries == 0){
-            printf("Demasiados intentos fallidos, cancelando operacion...\n\n");
-            checkIn = 'f';
-            break;
-        }
-        strcpy(lastName, auxCad);
-        printf("\n");
-        tries = 3;
+            while(strlen(auxCad)>20 && tries > 0)
+            {
+                printf("Apellido demasiado largo. Maximo 20 caracteres! Reingrese apellido: ");
+                fflush(stdin);
+                gets(auxCad);
+                tries--;
+            }
+            if (tries == 0)
+            {
+                printf("Demasiados intentos fallidos, cancelando operacion...\n\n");
+                checkIn = 'f';
+                break;
+            }
+            strcpy(lastName, auxCad);
+            printf("\n");
+            tries = 3;
 
-        printf("Ingrese el salario correspondiente: ");
-        scanf("%d", &salary);
-        while ((salary > 100000 || salary < 10000) && tries > 0){
-            printf("Salario ingresado incorrecto. Reingrese(10.000-100.000): ");
+            printf("Ingrese el salario correspondiente: ");
             scanf("%d", &salary);
-            tries--;
-        }
-        if (tries == 0){
-            printf("Demasiados intentos fallidos, cancelando operacion...\n");
-            checkIn = 'f';
-            break;
-        }
-        printf("\n");
-        tries = 3;
+            while ((salary > 100000 || salary < 10000) && tries > 0)
+            {
+                printf("Salario ingresado incorrecto. Reingrese(10.000-100.000): ");
+                scanf("%d", &salary);
+                tries--;
+            }
+            if (tries == 0)
+            {
+                printf("Demasiados intentos fallidos, cancelando operacion...\n");
+                checkIn = 'f';
+                break;
+            }
+            printf("\n");
+            tries = 3;
 
-        printf("Ingrese el sector del empleado (1-50): ");
-        scanf("%d", &sector);
-        while ((sector < 1 || sector > 50) && tries > 0){
-            printf("Numero de sector incorrecto. Ingrese un sector: ");
+            printf("Ingrese el sector del empleado (1-50): ");
             scanf("%d", &sector);
-            tries--;
+            while ((sector < 1 || sector > 50) && tries > 0)
+            {
+                printf("Numero de sector incorrecto. Ingrese un sector: ");
+                scanf("%d", &sector);
+                tries--;
             }
-        if (tries == 0){
-            printf("Demasiados intentos fallidos, cancelando operacion...\n\n");
-            checkIn = 'f';
-            break;
+            if (tries == 0)
+            {
+                printf("Demasiados intentos fallidos, cancelando operacion...\n\n");
+                checkIn = 'f';
+                break;
             }
-        flag = 1;
-        checkIn = 't';
+            flag = 1;
+            checkIn = 't';
         }
-        if (checkIn == 't'){
-        employees[indice] = addEmployee(id, name, lastName, salary, sector);
-        printf("Empleado ingresado al sistema exitosamente.\n\n");
-        isOk = 1;
-        } else{
+        if (checkIn == 't')
+        {
+            employees[indice] = addEmployee(id, name, lastName, salary, sector);
+            printf("Empleado ingresado al sistema exitosamente.\n\n");
+            isOk = 1;
+        }
+        else
+        {
             printf("ERROR. No se ha podido ingresar el empleado al sistema.\n\n");
-            }
         }
+    }
     return isOk;
 }
 
-int findEmployeeById(Employee employees[], int len, int id){
-   int indice = -1;
+int findEmployeeById(Employee employees[], int len, int id)
+{
+    int indice = -1;
     for(int i = 0; i < len; i++)
     {
         if (employees[i].isEmpty == 0 && employees[i].id == id)
@@ -193,7 +216,8 @@ int findEmployeeById(Employee employees[], int len, int id){
 
 }
 
-void removingEmployee(Employee employees[], int len){
+void removingEmployee(Employee employees[], int len)
+{
     int auxID;
     int indice;
 
@@ -201,15 +225,19 @@ void removingEmployee(Employee employees[], int len){
     printf("Ingrese el ID del empleado (Ref ID: 7000): ");
     scanf("%d", &auxID);
     indice = findEmployeeById(employees, len, auxID);
-    if (indice == -1){
+    if (indice == -1)
+    {
         printf("ID ingresado no existe en el sistema.\n\n");
         system("pause");
-    } else{
-        removeEmployee(employees, len, auxID);
-        }
     }
+    else
+    {
+        removeEmployee(employees, len, auxID);
+    }
+}
 
-int modifyMenu(Employee employees[], int len, int id){
+int modifyMenu(Employee employees[], int len, int id)
+{
     int option;
     int indice;
 
@@ -230,7 +258,8 @@ int modifyMenu(Employee employees[], int len, int id){
     return option;
 }
 
-void modifyingEmployee(Employee employees[], int len){
+void modifyingEmployee(Employee employees[], int len)
+{
     int auxID;
     int indice;
 
@@ -238,15 +267,19 @@ void modifyingEmployee(Employee employees[], int len){
     printf("Ingrese el ID del empleado (Ref ID: 7000): ");
     scanf("%d", &auxID);
     indice = findEmployeeById(employees, len, auxID);
-    if (indice == -1){
+    if (indice == -1)
+    {
         printf("ID ingresado no existe en el sistema.\n\n");
         system("pause");
-    } else{
+    }
+    else
+    {
         modifyMenuCases(employees, len, auxID);
-        }
+    }
 }
 
-void modifyMenuCases(Employee employess[], int tam, int id){
+void modifyMenuCases(Employee employess[], int tam, int id)
+{
     char follow = 'n';
     char name[51];
     char lastName[51];
@@ -258,181 +291,218 @@ void modifyMenuCases(Employee employess[], int tam, int id){
 
     indice = findEmployeeById(employess, tam, id);
 
-    do{
-       switch(modifyMenu(employess, tam, id)){
-   case 1:
-       printf("Ingrese el nuevo NOMBRE a modificar: ");
-       fflush(stdin);
-       gets(name);
-       while (strlen(name) > 20 && tries > 0)
-       {
-           printf("Nombre ingresado demasiado largo! Reingrese: ");
-           gets(name);
-           tries--;
-       }
-       if (tries == 0)
-       {
-           printf("Demasiados intentos fallidos, volviendo al menu.\n\n");
-           system("pause");
-       } else{
-           tries = 3;
-            printf("Confirmar cambio (y/n): ");
+    do
+    {
+        switch(modifyMenu(employess, tam, id))
+        {
+        case 1:
+            printf("Ingrese el nuevo NOMBRE a modificar: ");
             fflush(stdin);
-            resp = getchar();
-            while (resp != 'y' && resp != 'n' && tries > 0){
-                printf("Respuesta incorrecta. Reintente (y/n): ");
+            gets(name);
+            while (strlen(name) > 20 && tries > 0)
+            {
+                printf("Nombre ingresado demasiado largo! Reingrese: ");
+                gets(name);
                 tries--;
-                fflush(stdin);
-                resp = getchar();
             }
-            if (tries == 0){
+            if (tries == 0)
+            {
                 printf("Demasiados intentos fallidos, volviendo al menu.\n\n");
                 system("pause");
             }
-            if (resp == 'y'){
-            strcpy(employess[indice].name, name);
-            printf("Nuevo NOMBRE modificado exitosamente.\n\n");
-            system("pause");
-            } else {
-                printf("Se ha cancelado exitosamente la operacion.\n\n");
-                system("pause");
-            }
-       }
-    break;
-   case 2:
-       printf("Ingrese el nuevo APELLIDO a modificar: ");
-       fflush(stdin);
-       gets(lastName);
-       while (strlen(lastName) > 20 && tries > 0)
-       {
-           printf("Apellido ingresado demasiado largo! Reingrese: ");
-           gets(lastName);
-           tries--;
-       }
-       if (tries == 0)
-       {
-           printf("Demasiados intentos fallidos, volviendo al menu.\n\n");
-           system("pause");
-       } else{
-           tries = 3;
-            printf("Confirmar cambio (y/n): ");
-            fflush(stdin);
-            resp = getchar();
-            while (resp != 'y' && resp != 'n' && tries > 0){
-                printf("Respuesta incorrecta. Reintente (y/n): ");
-                tries--;
+            else
+            {
+                tries = 3;
+                printf("Confirmar cambio (y/n): ");
                 fflush(stdin);
                 resp = getchar();
+                while (resp != 'y' && resp != 'n' && tries > 0)
+                {
+                    printf("Respuesta incorrecta. Reintente (y/n): ");
+                    tries--;
+                    fflush(stdin);
+                    resp = getchar();
+                }
+                if (tries == 0)
+                {
+                    printf("Demasiados intentos fallidos, volviendo al menu.\n\n");
+                    system("pause");
+                }
+                if (resp == 'y')
+                {
+                    strcpy(employess[indice].name, name);
+                    printf("Nuevo NOMBRE modificado exitosamente.\n\n");
+                    system("pause");
+                }
+                else
+                {
+                    printf("Se ha cancelado exitosamente la operacion.\n\n");
+                    system("pause");
+                }
             }
-            if (tries == 0){
+            break;
+        case 2:
+            printf("Ingrese el nuevo APELLIDO a modificar: ");
+            fflush(stdin);
+            gets(lastName);
+            while (strlen(lastName) > 20 && tries > 0)
+            {
+                printf("Apellido ingresado demasiado largo! Reingrese: ");
+                gets(lastName);
+                tries--;
+            }
+            if (tries == 0)
+            {
                 printf("Demasiados intentos fallidos, volviendo al menu.\n\n");
                 system("pause");
             }
-            if (resp == 'y'){
-            strcpy(employess[indice].lastName, lastName);
-            printf("Nuevo APELLIDO modificado exitosamente.\n\n");
-            system("pause");
-            } else {
-                printf("Se ha cancelado exitosamente la operacion.\n\n");
-                system("pause");
+            else
+            {
+                tries = 3;
+                printf("Confirmar cambio (y/n): ");
+                fflush(stdin);
+                resp = getchar();
+                while (resp != 'y' && resp != 'n' && tries > 0)
+                {
+                    printf("Respuesta incorrecta. Reintente (y/n): ");
+                    tries--;
+                    fflush(stdin);
+                    resp = getchar();
+                }
+                if (tries == 0)
+                {
+                    printf("Demasiados intentos fallidos, volviendo al menu.\n\n");
+                    system("pause");
+                }
+                if (resp == 'y')
+                {
+                    strcpy(employess[indice].lastName, lastName);
+                    printf("Nuevo APELLIDO modificado exitosamente.\n\n");
+                    system("pause");
+                }
+                else
+                {
+                    printf("Se ha cancelado exitosamente la operacion.\n\n");
+                    system("pause");
+                }
             }
-       }
-    break;
-   case 3:
-       printf("Ingrese el nuevo SALARIO a modificar: ");
-       scanf("%d", &salary);
-       while ((salary > 100000 || salary < 10000) && tries > 0){
-            printf("Salario ingresado incorrecto. Reingrese(10.000-100.000): ");
+            break;
+        case 3:
+            printf("Ingrese el nuevo SALARIO a modificar: ");
             scanf("%d", &salary);
-            tries--;
-        }
-       if (tries == 0){
-        printf("Demasiados intentos fallidos, volviendo al menu.\n\n");
-        system("pause");
-       } else{
-            tries = 3;
-            printf("Confirmar cambio (y/n): ");
-            fflush(stdin);
-            resp = getchar();
-            while (resp != 'y' && resp != 'n' && tries > 0){
-                printf("Respuesta incorrecta. Reintente (y/n): ");
+            while ((salary > 100000 || salary < 10000) && tries > 0)
+            {
+                printf("Salario ingresado incorrecto. Reingrese(10.000-100.000): ");
+                scanf("%d", &salary);
                 tries--;
-                fflush(stdin);
-                resp = getchar();
             }
-            if (tries == 0){
+            if (tries == 0)
+            {
                 printf("Demasiados intentos fallidos, volviendo al menu.\n\n");
                 system("pause");
             }
-            if (resp == 'y'){
-                employess[indice].salary = salary;
-                printf("Nuevo SALARIO modificado exitosamente.\n\n");
-                printf("-ID-      -NOMBRE-       -APELLIDO-       -SALARIO-       -SECTOR-\n");
-                printEmployee(employess[indice]);
-                system("pause");
-            } else {
-                printf("Se ha cancelado exitosamente la operacion.\n\n");
-                system("pause");
+            else
+            {
+                tries = 3;
+                printf("Confirmar cambio (y/n): ");
+                fflush(stdin);
+                resp = getchar();
+                while (resp != 'y' && resp != 'n' && tries > 0)
+                {
+                    printf("Respuesta incorrecta. Reintente (y/n): ");
+                    tries--;
+                    fflush(stdin);
+                    resp = getchar();
+                }
+                if (tries == 0)
+                {
+                    printf("Demasiados intentos fallidos, volviendo al menu.\n\n");
+                    system("pause");
+                }
+                if (resp == 'y')
+                {
+                    employess[indice].salary = salary;
+                    printf("Nuevo SALARIO modificado exitosamente.\n\n");
+                    printf("-ID-      -NOMBRE-       -APELLIDO-       -SALARIO-       -SECTOR-\n");
+                    printEmployee(employess[indice]);
+                    system("pause");
+                }
+                else
+                {
+                    printf("Se ha cancelado exitosamente la operacion.\n\n");
+                    system("pause");
+                }
             }
-       }
-    break;
-   case 4:
-       printf("Ingrese el nuevo SECTOR a modificar: ");
-       scanf("%d", &sector);
-       while ((sector > 50 || sector < 1) && tries > 0){
-            printf("Numero de Sector ingresado incorrecto, reingrese (1-50): ");
+            break;
+        case 4:
+            printf("Ingrese el nuevo SECTOR a modificar: ");
             scanf("%d", &sector);
-            tries--;
-        }
-       if (tries == 0){
-        printf("Demasiados intentos fallidos, volviendo al menu.\n\n");
-        system("pause");
-       } else{
-            tries = 3;
-            printf("Confirmar cambio (y/n): ");
-            fflush(stdin);
-            resp = getchar();
-            while (resp != 'y' && resp != 'n' && tries > 0){
-                printf("Respuesta incorrecta. Reintente (y/n): ");
+            while ((sector > 50 || sector < 1) && tries > 0)
+            {
+                printf("Numero de Sector ingresado incorrecto, reingrese (1-50): ");
+                scanf("%d", &sector);
                 tries--;
-                fflush(stdin);
-                resp = getchar();
             }
-            if (tries == 0){
+            if (tries == 0)
+            {
                 printf("Demasiados intentos fallidos, volviendo al menu.\n\n");
                 system("pause");
             }
-            if (resp == 'y'){
-                employess[indice].sector = sector;
-                printf("Nuevo SECTOR modificado exitosamente.\n\n");
-                printf("-ID-      -NOMBRE-       -APELLIDO-       -SALARIO-       -SECTOR-\n");
-                printEmployee(employess[indice]);
-                system("pause");
-            } else {
-                printf("Se ha cancelado exitosamente la operacion.\n\n");
-                system("pause");
+            else
+            {
+                tries = 3;
+                printf("Confirmar cambio (y/n): ");
+                fflush(stdin);
+                resp = getchar();
+                while (resp != 'y' && resp != 'n' && tries > 0)
+                {
+                    printf("Respuesta incorrecta. Reintente (y/n): ");
+                    tries--;
+                    fflush(stdin);
+                    resp = getchar();
+                }
+                if (tries == 0)
+                {
+                    printf("Demasiados intentos fallidos, volviendo al menu.\n\n");
+                    system("pause");
+                }
+                if (resp == 'y')
+                {
+                    employess[indice].sector = sector;
+                    printf("Nuevo SECTOR modificado exitosamente.\n\n");
+                    printf("-ID-      -NOMBRE-       -APELLIDO-       -SALARIO-       -SECTOR-\n");
+                    printEmployee(employess[indice]);
+                    system("pause");
+                }
+                else
+                {
+                    printf("Se ha cancelado exitosamente la operacion.\n\n");
+                    system("pause");
+                }
             }
-       }
-    break;
-    case 5:
-        printf("Confirmar Salida (y/n): ");
-        fflush(stdin);
-        follow = getchar();
-        while(follow != 'y' && follow != 'n'){
-            printf("\nOpcion incorrecta, ingrese (y/n): \n");
+            break;
+        case 5:
+            printf("Confirmar Salida (y/n): ");
             fflush(stdin);
             follow = getchar();
+            while(follow != 'y' && follow != 'n')
+            {
+                printf("\nOpcion incorrecta, ingrese (y/n): \n");
+                fflush(stdin);
+                follow = getchar();
+            }
+            break;
+        default:
+            printf("Opcion seleccionada incorrecta/inexistente.\n\n");
+            break;
+            system("pause");
         }
-    break;
-   default:
-       printf("Opcion seleccionada incorrecta/inexistente.\n\n");
-    break;
-    system("pause");
-       }
-    }while(follow == 'n');
+    }
+    while(follow == 'n');
 }
 
-void printEmployee(Employee employeeX){
+void printEmployee(Employee employeeX)
+{
     printf("%d   %10s        %10s         %.2f          %02d\n",
            employeeX.id,
            employeeX.name,
@@ -441,7 +511,8 @@ void printEmployee(Employee employeeX){
            employeeX.sector);
 }
 
-void printEmployees(Employee employees[], int len){
+void printEmployees(Employee employees[], int len)
+{
     int flag = 0;
 
     printf("\n\n-ID-      -NOMBRE-       -APELLIDO-        -SALARIO-       -SECTOR-\n");
@@ -463,7 +534,8 @@ void printEmployees(Employee employees[], int len){
 
 }
 
-int removeEmployee(Employee employees[], int len, int id){
+int removeEmployee(Employee employees[], int len, int id)
+{
     int follow = 0;
     int tries = 3;
     char resp;
@@ -477,22 +549,27 @@ int removeEmployee(Employee employees[], int len, int id){
     printf("Confirmar BAJA (y/n): ");
     fflush(stdin);
     resp = getchar();
-        while(resp != 'y' && resp != 'n' && tries > 0){
-            printf("\nOpcion incorrecta, ingrese (y/n): ");
-            fflush(stdin);
-            resp = getchar();
-            tries--;
-        }
-        if (tries == 0){
-            printf("Demasiados intentos fallidos. ");
-        }
-        if (resp == 'y'){
-            employees[indice].isEmpty = 1;
-            printf("Se ha dado de baja correctamente el empleado del sistema.\n\n");
-            follow = 1;
-        } else{
-            printf("Operacion cancelada.\n");
-        }
+    while(resp != 'y' && resp != 'n' && tries > 0)
+    {
+        printf("\nOpcion incorrecta, ingrese (y/n): ");
+        fflush(stdin);
+        resp = getchar();
+        tries--;
+    }
+    if (tries == 0)
+    {
+        printf("Demasiados intentos fallidos. ");
+    }
+    if (resp == 'y')
+    {
+        employees[indice].isEmpty = 1;
+        printf("Se ha dado de baja correctamente el empleado del sistema.\n\n");
+        follow = 1;
+    }
+    else
+    {
+        printf("Operacion cancelada.\n");
+    }
     return follow;
 }
 
@@ -504,133 +581,154 @@ int sortEmployees(Employee employees[], int len, int order)
     int auxId;
     int auxSector;
 
-    for (int i = 0; i < len - 1; i++){
-        for(int j = i + 1; j < len; j++){
-            if (order == 1){
-            if ((strcmp(employees[i].lastName,employees[j].lastName) > 0) && employees[i].isEmpty == 0 && employees[j].isEmpty == 0 && employees[i].sector > employees[j].sector){
-                strcpy(auxCad, employees[i].lastName);
-                strcpy(employees[i].lastName, employees[j].lastName);
-                strcpy(employees[j].lastName, auxCad);
+    for (int i = 0; i < len - 1; i++)
+    {
+        for(int j = i + 1; j < len; j++)
+        {
+            if (order == 1)
+            {
+                if ((strcmp(employees[i].lastName,employees[j].lastName) > 0) && employees[i].isEmpty == 0 && employees[j].isEmpty == 0 && employees[i].sector > employees[j].sector)
+                {
+                    strcpy(auxCad, employees[i].lastName);
+                    strcpy(employees[i].lastName, employees[j].lastName);
+                    strcpy(employees[j].lastName, auxCad);
 
-                auxSector = employees[i].sector;
-                employees[i].sector = employees[j].sector;
-                employees[j].sector = auxSector;
+                    auxSector = employees[i].sector;
+                    employees[i].sector = employees[j].sector;
+                    employees[j].sector = auxSector;
 
-                strcpy(auxCad, employees[i].name);
-                strcpy(employees[i].name, employees[j].name);
-                strcpy(employees[j].name, auxCad);
+                    strcpy(auxCad, employees[i].name);
+                    strcpy(employees[i].name, employees[j].name);
+                    strcpy(employees[j].name, auxCad);
 
-                auxSal = employees[i].salary;
-                employees[i].salary = employees[j].salary;
-                employees[j].salary = auxSal;
+                    auxSal = employees[i].salary;
+                    employees[i].salary = employees[j].salary;
+                    employees[j].salary = auxSal;
 
-                auxId = employees[i].id;
-                employees[i].id = employees[j].id;
-                employees[j].id = auxId;
-                isOk = 1;
+                    auxId = employees[i].id;
+                    employees[i].id = employees[j].id;
+                    employees[j].id = auxId;
+                    isOk = 1;
                 }
-            } else if (order == 0){
-            if ((strcmp(employees[i].lastName,employees[j].lastName) < 0) && employees[i].isEmpty == 0 && employees[j].isEmpty == 0 && employees[i].sector < employees[j].sector){
-                strcpy(auxCad, employees[i].lastName);
-                strcpy(employees[i].lastName, employees[j].lastName);
-                strcpy(employees[j].lastName, auxCad);
+            }
+            else if (order == 0)
+            {
+                if ((strcmp(employees[i].lastName,employees[j].lastName) < 0) && employees[i].isEmpty == 0 && employees[j].isEmpty == 0 && employees[i].sector < employees[j].sector)
+                {
+                    strcpy(auxCad, employees[i].lastName);
+                    strcpy(employees[i].lastName, employees[j].lastName);
+                    strcpy(employees[j].lastName, auxCad);
 
-                auxSector = employees[i].sector;
-                employees[i].sector = employees[j].sector;
-                employees[j].sector = auxSector;
+                    auxSector = employees[i].sector;
+                    employees[i].sector = employees[j].sector;
+                    employees[j].sector = auxSector;
 
-                strcpy(auxCad, employees[i].name);
-                strcpy(employees[i].name, employees[j].name);
-                strcpy(employees[j].name, auxCad);
+                    strcpy(auxCad, employees[i].name);
+                    strcpy(employees[i].name, employees[j].name);
+                    strcpy(employees[j].name, auxCad);
 
-                auxSal = employees[i].salary;
-                employees[i].salary = employees[j].salary;
-                employees[j].salary = auxSal;
+                    auxSal = employees[i].salary;
+                    employees[i].salary = employees[j].salary;
+                    employees[j].salary = auxSal;
 
-                auxId = employees[i].id;
-                employees[i].id = employees[j].id;
-                employees[j].id = auxId;
-                isOk = 1;
+                    auxId = employees[i].id;
+                    employees[i].id = employees[j].id;
+                    employees[j].id = auxId;
+                    isOk = 1;
                 }
             }
         }
     }
     return isOk;
 }
-void reportEmployees(Employee employees[], int len){
+void reportEmployees(Employee employees[], int len)
+{
     char salir = 't';
     char option;
     int tries = 3;
     int sort;
-    do{
-    system("cls");
-    printf("------ INFORMES | EMPLEADOS ------\n\n");
-    printf("A) Informar lista de empleados ordenados alfabeticamente por Apellido y Sector\n");
-    printf("B) Informar total y promedio de todos los salarios, y cuantos empleados superan el salario promedio\n");
-    printf("C) Salir\n\n");
-    printf("------ EMPLEADOS ACTUAL ------\n");
-    printEmployees(employees, len);
-    printf("\n");
-    printf("Elija opcion: ");
-    fflush(stdin);
-    scanf("%c", &option);
-    while ((option != 'a' && option != 'b' && option != 'c') && tries > 0){
-        printf("Opcion seleccionada incorrecta, reingrese ('a','b' o 'c'): ");
-        fflush(stdin);
-        tries--;
-        scanf("%c", &option);
-    }
-    if (tries == 0)
+    do
     {
-        printf("Demasiados intentos fallidos. ");
-        salir = 'f';
-        system("pause");
-    }
-    switch(option){
-case 'a':
-    sort = sortEmployees(employees, len, 1);
-        if (sort == 1){
-        printf("------ EMPLEADOS ORDENADOS ------\n");
+        system("cls");
+        printf("------ INFORMES | EMPLEADOS ------\n\n");
+        printf("A) Informar lista de empleados ordenados alfabeticamente por Apellido y Sector\n");
+        printf("B) Informar total y promedio de todos los salarios, y cuantos empleados superan el salario promedio\n");
+        printf("C) Salir\n\n");
+        printf("------ EMPLEADOS ACTUAL ------\n");
         printEmployees(employees, len);
-        system("pause");
-        } else{
-            printf("El proceso de ordenamiento ha fallado!\n");
+        printf("\n");
+        printf("Elija opcion: ");
+        fflush(stdin);
+        scanf("%c", &option);
+        while ((option != 'a' && option != 'b' && option != 'c') && tries > 0)
+        {
+            printf("Opcion seleccionada incorrecta, reingrese ('a','b' o 'c'): ");
+            fflush(stdin);
+            tries--;
+            scanf("%c", &option);
+        }
+        if (tries == 0)
+        {
+            printf("Demasiados intentos fallidos. ");
+            salir = 'f';
             system("pause");
         }
-    break;
-case 'b':
-    sortEmployeesSalary(employees, len);
-    break;
-case 'c':
-    salir = 'f';
-    break;
-      }
-    }while(salir == 't');
+        switch(option)
+        {
+        case 'a':
+            sort = sortEmployees(employees, len, 1);
+            if (sort == 1)
+            {
+                printf("------ EMPLEADOS ORDENADOS ------\n");
+                printEmployees(employees, len);
+                system("pause");
+            }
+            else
+            {
+                printf("El proceso de ordenamiento ha fallado!\n");
+                system("pause");
+            }
+            break;
+        case 'b':
+            sortEmployeesSalary(employees, len);
+            break;
+        case 'c':
+            salir = 'f';
+            break;
+        }
+    }
+    while(salir == 't');
 }
 
-void sortEmployeesSalary(Employee employees[], int len){
+void sortEmployeesSalary(Employee employees[], int len)
+{
     int acumulador = 0;
     float promedio;
     int cantEmployee = 0;
     float mayor;
     int counter = 0;
-    for (int i = 0; i < len; i++){
-        if (employees[i].isEmpty == 0){
+    for (int i = 0; i < len; i++)
+    {
+        if (employees[i].isEmpty == 0)
+        {
             cantEmployee++;
         }
     }
-    for(int i = 0; i < cantEmployee; i++){
+    for(int i = 0; i < cantEmployee; i++)
+    {
         acumulador += employees[i].salary;
         promedio = acumulador / cantEmployee;
-        if(mayor < employees[i].salary && employees[i].isEmpty == 0){
+        if(mayor < employees[i].salary && employees[i].isEmpty == 0)
+        {
             mayor = employees[i].salary;
         }
     }
-    for (int i = 0; i < len; i++){
-         if(employees[i].salary > promedio && employees[i].isEmpty == 0)
-            {
-                counter++;
-            }
+    for (int i = 0; i < len; i++)
+    {
+        if(employees[i].salary > promedio && employees[i].isEmpty == 0)
+        {
+            counter++;
+        }
     }
     printf("\n------ RESULTADOS ------\n\n");
     printf("Salarios totales: %d\n", acumulador);
@@ -640,10 +738,13 @@ void sortEmployeesSalary(Employee employees[], int len){
     system("pause");
 }
 
-int checkEmployee(Employee employees[], int len){
+int checkEmployee(Employee employees[], int len)
+{
     int isOk = 0;
-    for(int i = 0; i < len; i++){
-        if (employees[i].isEmpty == 0){
+    for(int i = 0; i < len; i++)
+    {
+        if (employees[i].isEmpty == 0)
+        {
             isOk = 1;
         }
     }
