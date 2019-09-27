@@ -9,11 +9,13 @@ int main()
 {
     Employee listEmployee[LEN];
     int employeeID = 7000;
+    int checkTrue;
     char follow = 'n';
 
     initEmployees(listEmployee, LEN);
 
-    employeeID = employeeID + hardcodearEmpleados(listEmployee, LEN, 5);
+    // Utilizar esta declaracion junto al prototipo y el desarrollo de la funcion si se desea testear rapidamente el TP
+    // employeeID = employeeID + hardcodearEmpleados(listEmployee, LEN, 10);
 
     do{
         switch(menu()){
@@ -23,18 +25,34 @@ int main()
         }
         break;
     case 'b':
-        searchEmployee(listEmployee, LEN);
+        checkTrue = checkEmployee(listEmployee, LEN);
+        if (checkTrue == 1){
+        modifyingEmployee(listEmployee, LEN);
+        } else {
+            printf("\nSe debe dar de ALTA al/los empleado(s) antes de realizar esta accion.\n");
+        }
         break;
     case 'c':
-        printf("\n\nOPCION C\n\n");
+        checkTrue = checkEmployee(listEmployee, LEN);
+        if (checkTrue == 1){
+        removingEmployee(listEmployee, LEN);
+        } else {
+            printf("\nSe debe dar de ALTA al/los empleado(s) antes de realizar esta accion.\n");
+        }
         break;
     case 'd':
-        printf("\n\nOPCION D\n\n");
+        checkTrue = checkEmployee(listEmployee, LEN);
+        if (checkTrue == 1){
+        reportEmployees(listEmployee, LEN);
+        } else {
+            printf("\nSe debe dar de ALTA al/los empleado(s) antes de realizar esta accion.\n");
+        }
         break;
     case 'e':
         printf("\n\nConfirmar salida (y/n): ");
         fflush(stdin);
         follow = getchar();
+        printf("\n");
         while(follow != 'y' && follow != 'n'){
             printf("\nOpcion incorrecta, ingrese (y/n): \n");
             fflush(stdin);
@@ -49,8 +67,6 @@ int main()
     printf("\n\n");
     system("pause");
     }while (follow == 'n');
-
-
 
     return 0;
 }
