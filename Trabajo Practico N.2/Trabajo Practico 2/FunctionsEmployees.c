@@ -4,7 +4,7 @@
 #include <string.h>
 
 #include "ArrayEmployees.h"
-// Utilizar esta funcion si se desea testar rapidamente el TP
+
 /*int hardcodearEmpleados(Employee x[], int tam, int cantidad)
 {
     int counter = 0;
@@ -15,7 +15,7 @@
         {7002, "Liliana", "Ramirez", 19130, 35, 0},
         {7003, "Pedro", "Novich", 14575, 46, 0},
         {7004, "Christian", "Baus", 21520, 7, 0},
-        {7005, "Nicolas", "Diaz", 15775, 12, 0},
+        {7005, "Nicolas", "Diaz", 15775, 12, 0},                // Utilizar esta funcion si se desea testar rapidamente el TP
         {7006, "Alejandra", "Ponce", 23580, 44, 0},
         {7007, "Julia", "Guzman", 20000, 12, 0},
         {7008, "Roberto", "Duro", 15620, 9, 0},
@@ -587,7 +587,7 @@ int sortEmployees(Employee employees[], int len, int order)
         {
             if (order == 1)
             {
-                if ((strcmp(employees[i].lastName,employees[j].lastName) > 0) && employees[i].isEmpty == 0 && employees[j].isEmpty == 0 && employees[i].sector > employees[j].sector)
+                if (employees[i].isEmpty == 0 && employees[j].isEmpty == 0 && employees[i].sector > employees[j].sector)
                 {
                     strcpy(auxCad, employees[i].lastName);
                     strcpy(employees[i].lastName, employees[j].lastName);
@@ -610,11 +610,8 @@ int sortEmployees(Employee employees[], int len, int order)
                     employees[j].id = auxId;
                     isOk = 1;
                 }
-            }
-            else if (order == 0)
-            {
-                if ((strcmp(employees[i].lastName,employees[j].lastName) < 0) && employees[i].isEmpty == 0 && employees[j].isEmpty == 0 && employees[i].sector < employees[j].sector)
-                {
+                if (employees[i].sector == employees[j].sector && strcmp(employees[i].lastName,employees[j].lastName) > 0 && employees[i].isEmpty == 0 && employees[j].isEmpty == 0){
+
                     strcpy(auxCad, employees[i].lastName);
                     strcpy(employees[i].lastName, employees[j].lastName);
                     strcpy(employees[j].lastName, auxCad);

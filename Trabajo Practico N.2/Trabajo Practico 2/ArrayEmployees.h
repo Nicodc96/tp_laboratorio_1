@@ -13,7 +13,7 @@ int isEmpty;
 }Employee;
 #endif // ARRAYEMPLOYEES_H_INCLUDED
 
-//int hardcodearEmpleados(Employee x[], int tam, int cantidad); // FUNCION DE PRUEBA
+int hardcodearEmpleados(Employee x[], int tam, int cantidad); // FUNCION DE PRUEBA
 
 /** \brief Option's Menu that the User can choose options "a","b","c","d" or "e".
  *  if other letter was choose, the function return default with the error message.
