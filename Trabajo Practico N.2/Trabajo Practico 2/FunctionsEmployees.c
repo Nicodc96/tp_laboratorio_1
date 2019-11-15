@@ -5,7 +5,7 @@
 
 #include "ArrayEmployees.h"
 
-/*int hardcodearEmpleados(Employee x[], int tam, int cantidad)
+int hardcodearEmpleados(Employee x[], int tam, int cantidad)
 {
     int counter = 0;
     Employee listaAuxiliar[] =
@@ -31,7 +31,7 @@
         }
     }
     return counter;
-} */
+}
 
 
 int menu()

@@ -15,7 +15,7 @@ int main()
     initEmployees(listEmployee, LEN);
 
     // Utilizar esta declaracion junto al prototipo y el desarrollo de la funcion si se desea testear rapidamente el TP
-    // employeeID = employeeID + hardcodearEmpleados(listEmployee, LEN, 10);
+    employeeID = employeeID + hardcodearEmpleados(listEmployee, LEN, 10);
 
     do
     {
