@@ -1,0 +1,38 @@
+# depslib dependency file v1.0
+1570309461 source:c:\nicofacultad\tp_laboratorio_1\trabajo practico n.2\trabajo practico 2\main.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	"ArrayEmployees.h"
+
+1569167207 c:\nicofacultad\tp_laboratorio_1\trabajo practico n.2\trabajo practico 2\bibliotecatp2.h
+
+1569167241 source:c:\nicofacultad\tp_laboratorio_1\trabajo practico n.2\trabajo practico 2\funcionestp2.c
+	<stdio.h>
+	<conio.h>
+	"bibliotecaTP2.h"
+
+1570037419 c:\nicofacultad\tp_laboratorio_1\trabajo practico n.2\trabajo practico 2\arrayemployees.h
+
+1570309461 source:c:\nicofacultad\tp_laboratorio_1\trabajo practico n.2\trabajo practico 2\functionsemployees.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	"ArrayEmployees.h"
+
+1601493512 source:c:\users\nicolas\desktop\trabajo practico n.2\main.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	"ArrayEmployees.h"
+
+1601493002 c:\users\nicolas\desktop\trabajo practico n.2\arrayemployees.h
+
+1601493407 source:c:\users\nicolas\desktop\trabajo practico n.2\functionsemployees.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	"ArrayEmployees.h"
+
