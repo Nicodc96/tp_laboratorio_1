@@ -36,3 +36,18 @@
 	<string.h>
 	"ArrayEmployees.h"
 
+1601683066 source:c:\users\nicolas\desktop\nueva carpeta\tp_laboratorio_1\trabajo practico n.2\main.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	"ArrayEmployees.h"
+
+1601682513 c:\users\nicolas\desktop\nueva carpeta\tp_laboratorio_1\trabajo practico n.2\arrayemployees.h
+
+1601682970 source:c:\users\nicolas\desktop\nueva carpeta\tp_laboratorio_1\trabajo practico n.2\functionsemployees.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+	<string.h>
+	"ArrayEmployees.h"
+

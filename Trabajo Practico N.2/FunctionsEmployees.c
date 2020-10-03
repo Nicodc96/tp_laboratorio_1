@@ -8,6 +8,16 @@
 
 // -------- COMIENZO DE DEFINICIÓN DE FUNCIONES -------- //
 
+/** \brief Función unica y exclusivamente para fines de TESTING | Ingresa manualmente al array principal
+*          datos de empleados
+ *
+* \param Employee x[] | Recibe el array principal de empleados
+* \param int tam      | Tamaño del array principal}
+* \param int cant     | Cantida de Empleados a Hardcodear de Maximo 10
+*
+* \return int counter | La funcion devolverá un numero entero que servira para indicar al array principal
+*         cuantos IDs se ingresaron y sumarlos. Así el próximo ingreso tomará la ID que corresponda.
+*/
 int hardcodearEmpleados(Employee x[], int tam, int cant)
 {
     int counter = 0;
@@ -24,7 +34,6 @@ int hardcodearEmpleados(Employee x[], int tam, int cant)
         {7008, "Roberto", "Duro", 15620, 9, 0},
         {7009, "Francisco", "Robaina", 17900, 36, 0},
     };
-
     if (cant <= tam && cant < 20)
     {
         for (int i = 0; i < cant; i++)
@@ -36,7 +45,14 @@ int hardcodearEmpleados(Employee x[], int tam, int cant)
     return counter;
 }
 
-
+/** \brief Menú de Opciones Principal | El programa iniciará mostrando esta función donde
+*          el usuario ingresará un caracter de la cual devolverá la función correspondiente. Si
+*          el caracter no corresponde a ninguno del menú indicará el mensaje de error y se volverá
+*          a ejecutar.
+* \param void
+*
+* \return char option | Devolverá un char que servirá para ejecutar una orden en el switch de main();
+*/
 int menu()
 {
     char option;
@@ -48,12 +64,22 @@ int menu()
     printf("C) BAJAS\n");
     printf("D) INFORMAR\n");
     printf("E) SALIR\n\n");
+
     printf("Elija una opcion: ");
     fflush(stdin);
     option = getchar();
     return option;
 }
 
+/** \brief Función inicializadora del Array Principal | Antes de inicializar el menú principal
+*          la función cargará en memoria el valor de isEmpty = 1 en todos los valores del array de tipo
+*          Employee indicando que pueden ingresarse empleados y que no están ocupados.
+*
+* \param Employee employeesList[] | Array principal
+* \param int len                  | Indicador del tamaño del array principal
+*
+* \return int isOk                | (0) si no pudo inicializarse el array, (1) si se ha cargado correctamente el array
+*/
 int initEmployees(Employee employeesList[], int len)
 {
     int isOk = 0;
@@ -65,6 +91,16 @@ int initEmployees(Employee employeesList[], int len)
     return isOk;
 }
 
+/** \brief Función encargada de agregear elementos al array principal |
+*
+* \param int id             | ID del empleado
+* \param char name[]        | Nombre del Empleado
+* \param char lastName[]    | Apellido del Empleado
+* \param float salary       | Salario del Empleado
+* \param int sector         | Sector correspondiente al Empleado
+*
+* \return newEmployee       | La funcion devolvera el elemento cargado con los datos recibido por parámetro
+*/
 Employee addEmployee(int id, char name[],char lastName[],float salary,int sector)
 {
     Employee newEmployee;
@@ -78,6 +114,15 @@ Employee addEmployee(int id, char name[],char lastName[],float salary,int sector
     return newEmployee;
 }
 
+/** \brief Función buscadora del primer elemento del array principal con valor
+*          isEmpty = 1
+*
+* \param Employee employeesList[]   | Array principal
+* \param int len                    | Tamaño del array principal
+*
+* \return int indice                | (-1) si no se encontrado ningún elemento del array
+*         con valor isEmpty = 1 o el índice del elemento encontrado
+*/
 int searchEmpty(Employee employeesList[], int len)
 {
     int indice = -1;
@@ -92,6 +137,15 @@ int searchEmpty(Employee employeesList[], int len)
     return indice;
 }
 
+/** \brief Función encargada de agregar un nuevo elemento al array principal
+*
+* \param Employee employeesList[]   | Array principal
+* \param int len                    | Tamaño del array principal
+* \param int id                     | ID pre-establecido desde main()
+*
+* \return int isOk                  | (0) Si el array está completo o no se pudo agregar el empleado al array
+*         y (1) indicando que se agrego el empleado al array
+*/
 int newEmployee(Employee employeesList[], int len, int id)
 {
     int isOk = 0;
@@ -116,10 +170,11 @@ int newEmployee(Employee employeesList[], int len, int id)
     {
         while (checkIn == 'g' || flag == 0)
         {
+            printf("--- Usted tiene %d intentos para realizar el ingreso de empleado ---\n\n", tries);
             printf("Ingrese el nombre del Empleado(maximo 20 caracteres): ");
             fflush(stdin);
             gets(auxCad);
-            while(strlen(auxCad)>20 && tries > 0)
+            while(strlen(auxCad)>20 && tries >= 0)
             {
                 printf("Nombre demasiado largo. Maximo 20 caracteres! Reingrese nombre: ");
                 fflush(stdin);
@@ -139,7 +194,7 @@ int newEmployee(Employee employeesList[], int len, int id)
             printf("Ingrese el apellido del Empleado(maximo 20 caracteres): ");
             fflush(stdin);
             gets(auxCad);
-            while(strlen(auxCad)>20 && tries > 0)
+            while(strlen(auxCad)>20 && tries >= 0)
             {
                 printf("Apellido demasiado largo. Maximo 20 caracteres! Reingrese apellido: ");
                 fflush(stdin);
@@ -156,11 +211,13 @@ int newEmployee(Employee employeesList[], int len, int id)
             printf("\n");
             tries = 3;
 
-            printf("Ingrese el salario correspondiente: ");
+            printf("Ingrese el salario correspondiente (10.000-100.000): ");
+            fflush(stdin);
             scanf("%d", &salary);
-            while ((salary > 100000 || salary < 10000) && tries > 0)
+            while ((salary > 100000 || salary < 10000) && tries >= 0)
             {
                 printf("Salario ingresado incorrecto. Reingrese(10.000-100.000): ");
+                fflush(stdin);
                 scanf("%d", &salary);
                 tries--;
             }
@@ -174,10 +231,12 @@ int newEmployee(Employee employeesList[], int len, int id)
             tries = 3;
 
             printf("Ingrese el sector del empleado (1-50): ");
+            fflush(stdin);
             scanf("%d", &sector);
-            while ((sector < 1 || sector > 50) && tries > 0)
+            while ((sector < 1 || sector > 50) && tries >= 0)
             {
                 printf("Numero de sector incorrecto. Ingrese un sector: ");
+                fflush(stdin);
                 scanf("%d", &sector);
                 tries--;
             }
@@ -195,15 +254,23 @@ int newEmployee(Employee employeesList[], int len, int id)
             employeesList[indice] = addEmployee(id, name, lastName, salary, sector);
             printf("Empleado ingresado al sistema exitosamente.\n\n");
             isOk = 1;
-        }
-        else
-        {
-            printf("ERROR. No se ha podido ingresar el empleado al sistema.\n\n");
-        }
+        } else
+            {
+                printf("ERROR. No se ha podido ingresar el empleado al sistema.\n\n");
+            }
     }
     return isOk;
 }
 
+/** \brief Función que busca un empleado con un ID recibido por parámetro
+*
+* \param int id                     | ID del empleado a buscar
+* \param Employee employeesList[]   | Array principal
+* \param int len                    | Tamaño del array principal
+*
+* \return int indice                | La funcion devolvera el indice del empleado si se ha encontrado
+*         o devolverá (-1) si no se ha encontrado el empleado o el array es igual a NULL
+*/
 int findEmployeeById(Employee employeesList[], int len, int id)
 {
     int indice = -1;
@@ -218,6 +285,14 @@ int findEmployeeById(Employee employeesList[], int len, int id)
     return indice;
 }
 
+/** \brief Función encargada de pedir un ID y ejecutar la función removeEmployee
+ *
+ * \param Employee employeesList[]  | Array principal
+ * \param int len                   | Tamaño del array principal
+ *
+ * \return void                     | La funcion no retorna valor ya que termina en la funcion
+ *         removeEmployee.
+ */
 void removingEmployee(Employee employeesList[], int len)
 {
     int auxID;
@@ -231,13 +306,21 @@ void removingEmployee(Employee employeesList[], int len)
     {
         printf("ID ingresado no existe en el sistema.\n\n");
         system("pause");
-    }
-    else
-    {
-        removeEmployee(employeesList, len, auxID);
-    }
+    } else
+        {
+            removeEmployee(employeesList, len, auxID);
+        }
 }
 
+/** \brief Sub-Menú de opciones de modificación de los elementos en el array principal
+*
+* \param Employee employeesList[]   | Array Principal
+* \param int len                    | Tamaño del array principal
+* \param int id                     | ID verificado recibido de la funcion modifyingEmployee
+*
+* \return int option                | La función devolverá un entero (entre 1 y 5) verificado
+*         que utilizará la función modifyMenuCases
+*/
 int modifyMenu(Employee employeesList[], int len, int id)
 {
     int option;
@@ -256,6 +339,7 @@ int modifyMenu(Employee employeesList[], int len, int id)
     printf("3) Modificar SALARIO\n");
     printf("4) Modificar SECTOR\n");
     printf("5) Salir\n\n");
+
     printf("Elija opcion: ");
     fflush(stdin);
     scanf("%d", &option);
@@ -263,6 +347,15 @@ int modifyMenu(Employee employeesList[], int len, int id)
     return option;
 }
 
+/** \brief Función encargada de solicitar el ID del Empleado a modificar y
+*          ejecutar la funcion modifyMenuCases
+*
+* \param Employee employeesList[]   | Array Principal
+* \param int len                    | Tamaño del array principal
+*
+* \return void                      | La funcion termina enviando el ID verificado del empleado y
+*         ejecutando a la funcion modifyMenuCases
+*/
 void modifyingEmployee(Employee employeesList[], int len)
 {
     int auxID;
@@ -276,13 +369,20 @@ void modifyingEmployee(Employee employeesList[], int len)
     {
         printf("ID ingresado no existe en el sistema.\n\n");
         system("pause");
-    }
-    else
-    {
-        modifyMenuCases(employeesList, len, auxID);
-    }
+    } else
+        {
+            modifyMenuCases(employeesList, len, auxID);
+        }
 }
 
+/** \brief Función ejecutora de la modificación de empleados | La función ejecuta la función
+*          modifyMenu con un switch y realiza la acción que esta devuelva
+* \param Employee employeesList[]  | Array principal
+* \param int len                   | Tamaño del array principal
+* \param int id                    | ID recibido de la funcion modifyingEmployee
+*
+* \return void                     |
+*/
 void modifyMenuCases(Employee employeesList[], int len, int id)
 {
     char follow = 'n';
@@ -314,37 +414,35 @@ void modifyMenuCases(Employee employeesList[], int len, int id)
             {
                 printf("Demasiados intentos fallidos, volviendo al menu.\n\n");
                 system("pause");
-            }
-            else
-            {
-                tries = 3;
-                printf("Confirmar cambio (y/n): ");
-                fflush(stdin);
-                resp = getchar();
-                while (resp != 'y' && resp != 'n' && tries > 0)
-                {
-                    printf("Respuesta incorrecta. Reintente (y/n): ");
-                    tries--;
+            } else
+                    {
+                    tries = 3;
+                    printf("Confirmar cambio (y/n): ");
                     fflush(stdin);
                     resp = getchar();
+                    while (resp != 'y' && resp != 'n' && tries > 0)
+                    {
+                        printf("Respuesta incorrecta. Reintente (y/n): ");
+                        tries--;
+                        fflush(stdin);
+                        resp = getchar();
+                    }
+                    if (tries == 0)
+                    {
+                        printf("Demasiados intentos fallidos, volviendo al menu.\n\n");
+                        system("pause");
+                    }
+                    if (resp == 'y')
+                    {
+                        strcpy(employeesList[indice].name, name);
+                        printf("Nuevo NOMBRE modificado exitosamente.\n\n");
+                        system("pause");
+                    } else
+                        {
+                            printf("Se ha cancelado exitosamente la operacion.\n\n");
+                            system("pause");
+                        }
                 }
-                if (tries == 0)
-                {
-                    printf("Demasiados intentos fallidos, volviendo al menu.\n\n");
-                    system("pause");
-                }
-                if (resp == 'y')
-                {
-                    strcpy(employeesList[indice].name, name);
-                    printf("Nuevo NOMBRE modificado exitosamente.\n\n");
-                    system("pause");
-                }
-                else
-                {
-                    printf("Se ha cancelado exitosamente la operacion.\n\n");
-                    system("pause");
-                }
-            }
             break;
         case 2:
             printf("Ingrese el nuevo APELLIDO a modificar: ");
@@ -360,37 +458,35 @@ void modifyMenuCases(Employee employeesList[], int len, int id)
             {
                 printf("Demasiados intentos fallidos, volviendo al menu.\n\n");
                 system("pause");
-            }
-            else
-            {
-                tries = 3;
-                printf("Confirmar cambio (y/n): ");
-                fflush(stdin);
-                resp = getchar();
-                while (resp != 'y' && resp != 'n' && tries > 0)
+            } else
                 {
-                    printf("Respuesta incorrecta. Reintente (y/n): ");
-                    tries--;
+                    tries = 3;
+                    printf("Confirmar cambio (y/n): ");
                     fflush(stdin);
                     resp = getchar();
+                    while (resp != 'y' && resp != 'n' && tries > 0)
+                    {
+                        printf("Respuesta incorrecta. Reintente (y/n): ");
+                        tries--;
+                        fflush(stdin);
+                        resp = getchar();
+                    }
+                    if (tries == 0)
+                    {
+                        printf("Demasiados intentos fallidos, volviendo al menu.\n\n");
+                        system("pause");
+                    }
+                    if (resp == 'y')
+                    {
+                        strcpy(employeesList[indice].lastName, lastName);
+                        printf("Nuevo APELLIDO modificado exitosamente.\n\n");
+                        system("pause");
+                    } else
+                        {
+                            printf("Se ha cancelado exitosamente la operacion.\n\n");
+                            system("pause");
+                        }
                 }
-                if (tries == 0)
-                {
-                    printf("Demasiados intentos fallidos, volviendo al menu.\n\n");
-                    system("pause");
-                }
-                if (resp == 'y')
-                {
-                    strcpy(employeesList[indice].lastName, lastName);
-                    printf("Nuevo APELLIDO modificado exitosamente.\n\n");
-                    system("pause");
-                }
-                else
-                {
-                    printf("Se ha cancelado exitosamente la operacion.\n\n");
-                    system("pause");
-                }
-            }
             break;
         case 3:
             printf("Ingrese el nuevo SALARIO a modificar: ");
@@ -405,39 +501,37 @@ void modifyMenuCases(Employee employeesList[], int len, int id)
             {
                 printf("Demasiados intentos fallidos, volviendo al menu.\n\n");
                 system("pause");
-            }
-            else
-            {
-                tries = 3;
-                printf("Confirmar cambio (y/n): ");
-                fflush(stdin);
-                resp = getchar();
-                while (resp != 'y' && resp != 'n' && tries > 0)
+            } else
                 {
-                    printf("Respuesta incorrecta. Reintente (y/n): ");
-                    tries--;
+                    tries = 3;
+                    printf("Confirmar cambio (y/n): ");
                     fflush(stdin);
                     resp = getchar();
+                    while (resp != 'y' && resp != 'n' && tries > 0)
+                    {
+                        printf("Respuesta incorrecta. Reintente (y/n): ");
+                        tries--;
+                        fflush(stdin);
+                        resp = getchar();
+                    }
+                    if (tries == 0)
+                    {
+                        printf("Demasiados intentos fallidos, volviendo al menu.\n\n");
+                        system("pause");
+                    }
+                    if (resp == 'y')
+                    {
+                        employeesList[indice].salary = salary;
+                        printf("Nuevo SALARIO modificado exitosamente.\n\n");
+                        printf("-ID-      -NOMBRE-       -APELLIDO-       -SALARIO-       -SECTOR-\n");
+                        printEmployee(employeesList[indice]);
+                        system("pause");
+                    } else
+                        {
+                            printf("Se ha cancelado exitosamente la operacion.\n\n");
+                            system("pause");
+                        }
                 }
-                if (tries == 0)
-                {
-                    printf("Demasiados intentos fallidos, volviendo al menu.\n\n");
-                    system("pause");
-                }
-                if (resp == 'y')
-                {
-                    employeesList[indice].salary = salary;
-                    printf("Nuevo SALARIO modificado exitosamente.\n\n");
-                    printf("-ID-      -NOMBRE-       -APELLIDO-       -SALARIO-       -SECTOR-\n");
-                    printEmployee(employeesList[indice]);
-                    system("pause");
-                }
-                else
-                {
-                    printf("Se ha cancelado exitosamente la operacion.\n\n");
-                    system("pause");
-                }
-            }
             break;
         case 4:
             printf("Ingrese el nuevo SECTOR a modificar: ");
@@ -452,39 +546,37 @@ void modifyMenuCases(Employee employeesList[], int len, int id)
             {
                 printf("Demasiados intentos fallidos, volviendo al menu.\n\n");
                 system("pause");
-            }
-            else
-            {
-                tries = 3;
-                printf("Confirmar cambio (y/n): ");
-                fflush(stdin);
-                resp = getchar();
-                while (resp != 'y' && resp != 'n' && tries > 0)
+            } else
                 {
-                    printf("Respuesta incorrecta. Reintente (y/n): ");
-                    tries--;
+                    tries = 3;
+                    printf("Confirmar cambio (y/n): ");
                     fflush(stdin);
                     resp = getchar();
+                    while (resp != 'y' && resp != 'n' && tries > 0)
+                    {
+                        printf("Respuesta incorrecta. Reintente (y/n): ");
+                        tries--;
+                        fflush(stdin);
+                        resp = getchar();
+                    }
+                    if (tries == 0)
+                    {
+                        printf("Demasiados intentos fallidos, volviendo al menu.\n\n");
+                        system("pause");
+                    }
+                    if (resp == 'y')
+                    {
+                        employeesList[indice].sector = sector;
+                        printf("Nuevo SECTOR modificado exitosamente.\n\n");
+                        printf("-ID-      -NOMBRE-       -APELLIDO-       -SALARIO-       -SECTOR-\n");
+                        printEmployee(employeesList[indice]);
+                        system("pause");
+                    } else
+                        {
+                            printf("Se ha cancelado exitosamente la operacion.\n\n");
+                            system("pause");
+                        }
                 }
-                if (tries == 0)
-                {
-                    printf("Demasiados intentos fallidos, volviendo al menu.\n\n");
-                    system("pause");
-                }
-                if (resp == 'y')
-                {
-                    employeesList[indice].sector = sector;
-                    printf("Nuevo SECTOR modificado exitosamente.\n\n");
-                    printf("-ID-      -NOMBRE-       -APELLIDO-       -SALARIO-       -SECTOR-\n");
-                    printEmployee(employeesList[indice]);
-                    system("pause");
-                }
-                else
-                {
-                    printf("Se ha cancelado exitosamente la operacion.\n\n");
-                    system("pause");
-                }
-            }
             break;
         case 5:
             printf("Confirmar Salida (y/n): ");
@@ -506,6 +598,12 @@ void modifyMenuCases(Employee employeesList[], int len, int id)
     while(follow == 'n');
 }
 
+/** \brief Función que imprime un empleado
+ *
+ * \param Employee employeeX    | Un elemento de tipo Employee
+ *
+ * \return void                 |
+ */
 void printEmployee(Employee employeeX)
 {
     printf("%d   %10s        %10s         %.2f          %02d\n",
@@ -516,6 +614,14 @@ void printEmployee(Employee employeeX)
            employeeX.sector);
 }
 
+/** \brief Función que imprime el Array de empleados si NO estan vacios
+*
+* \param Employee employeesList[]     | Array principal
+* \param int len                      | Tamaño del array principal
+*
+* \return int isOk                    | (1) si hay al menos 1 empleado cargado y lo muestra o
+*         (0) si no hay empleados cargados mostrando el mensaje de error.
+*/
 int printEmployees(Employee employeesList[], int len)
 {
     int flag = 0;
@@ -541,6 +647,15 @@ int printEmployees(Employee employeesList[], int len)
     return isOk;
 }
 
+/** \brief Función removedora de empleados con un ID recibido por parámetro
+*
+* \param Employee employeesList[]   | Array principal
+* \param int len                    | Tamaño del array principal
+* \param int id                     | ID recibido por parámetro
+*
+* \return int follow                | (0) si la funcion se ha cancelado o se realizaron demasiados
+*         intentos fallidos o (1) si se ha dado de baja correctamente
+*/
 int removeEmployee(Employee employeesList[], int len, int id)
 {
     int follow = 0;
@@ -572,14 +687,21 @@ int removeEmployee(Employee employeesList[], int len, int id)
         employeesList[indice].isEmpty = 1;
         printf("Se ha dado de baja correctamente el empleado del sistema.\n\n");
         follow = 1;
-    }
-    else
-    {
-        printf("Operacion cancelada.\n");
-    }
+    } else
+        {
+            printf("Operacion cancelada.\n");
+        }
     return follow;
 }
 
+/** \brief Función ordenadora de Array Principal
+*
+* \param Employee employeesList[]   | Array principal
+* \param int len                    | Tamaño del array principal
+* \param int order                  | Orden (1) de manera ascendente o (0) de manera descendente
+*
+* \return int isOk                  | (1) si se ha realizado correctamente el ordenamiento o (0) en caso contrario
+*/
 int sortEmployees(Employee employeesList[], int len, int order)
 {
     int isOk = 0;
@@ -628,6 +750,17 @@ int sortEmployees(Employee employeesList[], int len, int order)
     }
     return isOk;
 }
+
+/** \brief Funcion ejecutora de la opción "INFORMAR" | Muestra el menú de informes, ejecuta la opción
+*          verificada y, llama las funciones sortEmployee y sortEmployeesSalary.
+*
+*
+* \param Employee employeesList[]   | Array principal
+* \param int len                    | Tamaño del array principal
+*
+* \return void                      | La función no retorna ningún valor, termina en main() una vez finalizado
+*         el búcle while.
+*/
 void reportEmployees(Employee employeesList[], int len)
 {
     char salir = 't';
@@ -670,12 +803,11 @@ void reportEmployees(Employee employeesList[], int len)
                 printf("------ EMPLEADOS ORDENADOS DE MANERA ASCENDENTE ------\n");
                 printEmployees(employeesList, len);
                 system("pause");
-            }
-            else
-            {
-                printf("El proceso de ordenamiento ha fallado!\n");
-                system("pause");
-            }
+            } else
+                {
+                    printf("El proceso de ordenamiento ha fallado!\n");
+                    system("pause");
+                }
             break;
         case 'b':
             sort = sortEmployees(employeesList, len, 0);
@@ -684,12 +816,11 @@ void reportEmployees(Employee employeesList[], int len)
                 printf("------ EMPLEADOS ORDENADOS DE MANERA DESCENDENTE ------\n");
                 printEmployees(employeesList, len);
                 system("pause");
-            }
-            else
-            {
-                printf("El proceso de ordenamiento ha fallado!\n");
-                system("pause");
-            }
+            } else
+                {
+                    printf("El proceso de ordenamiento ha fallado!\n");
+                    system("pause");
+                }
             break;
         case 'c':
             sortEmployeesSalary(employeesList, len);
@@ -702,6 +833,15 @@ void reportEmployees(Employee employeesList[], int len)
     while(salir == 't');
 }
 
+/** \brief Función ejecutada por reportEmployees encargada de calcular e informar los salarios
+*          totales de todos los empleados, el promedio de todos ellos y cuantos empleados superan
+*          el promedio del salario general.
+*
+* \param Employee employeesList[]   | Array principal
+* \param int len                    | Tamaño del array principal
+*
+* \return void                      | La funcion empieza y termina dentro de la función reportEmployees
+*/
 void sortEmployeesSalary(Employee employeesList[], int len)
 {
     int acumulador = 0;
@@ -740,6 +880,14 @@ void sortEmployeesSalary(Employee employeesList[], int len)
     system("pause");
 }
 
+/** \brief Función que comprueba si existen empleados en el array principal
+*
+* \param Employee employeesList[]   | Array principal
+* \param int len                    | Tamaño del array principal
+*
+* \return int isOk                  | (0) si no existen empleados en el array o (1)
+*         si hay al menos un empleado en el array.
+*/
 int checkEmployee(Employee employeesList[], int len)
 {
     int isOk = 0;
@@ -752,3 +900,5 @@ int checkEmployee(Employee employeesList[], int len)
     }
     return isOk;
 }
+
+// -------- FIN DE DEFINICIÓN DE FUNCIONES -------- //

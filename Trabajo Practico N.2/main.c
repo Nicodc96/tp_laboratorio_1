@@ -6,7 +6,7 @@
     ----------------------------------------------------
     Name: Trabajo Práctico N°2 para Laboratorio I
     Author: Lautaro N. Díaz
-    Version: 2.0
+    Version: 2.1
     ----------------------------------------------------
 */
 
@@ -26,7 +26,7 @@ int main()
     if(initEmployees(listEmployee, LEN))
     {
     /*
-        Quitar el comentario de la línea de código que se encuentra abajo para testear rápidamente el TP con 10 empleados
+        // Quitar el comentario de la línea de código que se encuentra abajo para testear rápidamente el TP con 10 empleados //
     */
     //  employeeID = employeeID + hardcodearEmpleados(listEmployee, LEN, 10);
 
@@ -45,36 +45,33 @@ int main()
             if (checkTrue == 1)
             {
                 modifyingEmployee(listEmployee, LEN);
-            }
-            else
-            {
-                printf("\nSe debe dar de ALTA al/los empleado(s) antes de realizar esta accion.\n");
-            }
+            } else
+                {
+                    printf("\nSe debe dar de ALTA al/los empleado(s) antes de realizar esta accion.\n");
+                }
             break;
         case 'c':
             checkTrue = checkEmployee(listEmployee, LEN);
             if (checkTrue == 1)
             {
                 removingEmployee(listEmployee, LEN);
-            }
-            else
-            {
-                printf("\nSe debe dar de ALTA al/los empleado(s) antes de realizar esta accion.\n");
-            }
+            } else
+                {
+                    printf("\nSe debe dar de ALTA al/los empleado(s) antes de realizar esta accion.\n");
+                }
             break;
         case 'd':
             checkTrue = checkEmployee(listEmployee, LEN);
             if (checkTrue == 1)
             {
                 reportEmployees(listEmployee, LEN);
-            }
-            else
-            {
-                printf("\nSe debe dar de ALTA al/los empleado(s) antes de realizar esta accion.\n");
-            }
+            } else
+                {
+                    printf("\nSe debe dar de ALTA al/los empleado(s) antes de realizar esta accion.\n");
+                }
             break;
         case 'e':
-            printf("\n\nConfirmar salida (y/n): ");
+            printf("\nConfirmar salida (y/n): ");
             fflush(stdin);
             follow = getchar();
             printf("\n");
