@@ -172,3 +172,43 @@
 	"LinkedList.h"
 	"Employee.h"
 
+1604644115 source:c:\users\nicolas\desktop\repositorios temporales\tp_laboratorio_1\trabajo practico n.3\main.c
+	<stdio.h>
+	<stdlib.h>
+	"LinkedList.h"
+	"Controller.h"
+	"Employee.h"
+
+1604312226 c:\users\nicolas\desktop\repositorios temporales\tp_laboratorio_1\trabajo practico n.3\linkedlist.h
+
+1604644606 c:\users\nicolas\desktop\repositorios temporales\tp_laboratorio_1\trabajo practico n.3\controller.h
+	"LinkedList.h"
+
+1604644609 c:\users\nicolas\desktop\repositorios temporales\tp_laboratorio_1\trabajo practico n.3\employee.h
+
+1604643763 source:c:\users\nicolas\desktop\repositorios temporales\tp_laboratorio_1\trabajo practico n.3\parser.c
+	<stdio.h>
+	<stdlib.h>
+	"LinkedList.h"
+	"Employee.h"
+
+1604643544 source:c:\users\nicolas\desktop\repositorios temporales\tp_laboratorio_1\trabajo practico n.3\controller.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"LinkedList.h"
+	"Controller.h"
+	"Employee.h"
+	"parser.h"
+
+1604502818 c:\users\nicolas\desktop\repositorios temporales\tp_laboratorio_1\trabajo practico n.3\parser.h
+	"LinkedList.h"
+
+1604644062 source:c:\users\nicolas\desktop\repositorios temporales\tp_laboratorio_1\trabajo practico n.3\employee.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Employee.h"
+	"parser.h"
+

@@ -11,7 +11,6 @@
  *
  * \return int option               | Retorna el valor numérico al switch de main();
  */
-
 int menu(void)
 {
     int option;
@@ -111,59 +110,54 @@ int controller_addEmployee(LinkedList* pArrayListEmployee)
     char auxCadena[100];
     int auxSueldo;
     int auxHorasTrabajadas;
-
-    system("cls");
-    printf("------------------ NOMINA DE EMPLEADOS | UTN FRA ------------------\n\n");
-    printf("------------------             ALTAS             ------------------\n\n");
-
     Employee* newEmpleado = employee_new();
     Employee* auxEmpleado = NULL;
-
-    printf("\nIngrese nombre del Empleado (20 caracteres maximo): ");
-    fflush(stdin);
-    scanf("%s", auxCadena);
-    while (strlen(auxCadena) > 19)
+    if (pArrayListEmployee != NULL)
     {
-        printf("Nombre demasiado largo! Reingrese (20 caracteres maximo): ");
+        system("cls");
+        printf("------------------ NOMINA DE EMPLEADOS | UTN FRA ------------------\n\n");
+        printf("------------------             ALTAS             ------------------\n\n");
+        printf("\nIngrese nombre del Empleado (20 caracteres maximo): ");
         fflush(stdin);
         scanf("%s", auxCadena);
-    }
-    employee_setNombre(newEmpleado, auxCadena);
-
-    printf("\nIngrese cantidad de Horas Trabajadas (1-10.000): ");
-    scanf("%d", &auxHorasTrabajadas);
-    while(auxHorasTrabajadas <= 0 || auxHorasTrabajadas > 10000)
-    {
-        printf("Error! Cantidad no valida! Reingrese (1-10.000): ");
-        scanf("%d", &auxHorasTrabajadas);
-    }
-    employee_setHorasTrabajadas(newEmpleado, auxHorasTrabajadas);
-
-    printf("\nIngrese el sueldo correspondiente (10.000 - 75.000): ");
-    scanf("%d", &auxSueldo);
-    while(auxSueldo < 10000 || auxSueldo > 75000)
-    {
-        printf("Error! Reingrese un valor correcto (10.000 - 75.000)!: ");
-        scanf("%d", &auxSueldo);
-    }
-    employee_setSueldo(newEmpleado, auxSueldo);
-
-    for (i = 0; i < ll_len(pArrayListEmployee); i++)
-    {
-        auxEmpleado = (Employee*) ll_get(pArrayListEmployee, i);
-        if(flag == 0 || auxEmpleado->id > idMax)
+        while (strlen(auxCadena) > 19)
         {
-            idMax = auxEmpleado->id;
-            flag = 1;
+            printf("Nombre demasiado largo! Reingrese (20 caracteres maximo): ");
+            fflush(stdin);
+            scanf("%s", auxCadena);
+        }
+        employee_setNombre(newEmpleado, auxCadena);
+        printf("\nIngrese cantidad de Horas Trabajadas (1-10.000): ");
+        scanf("%d", &auxHorasTrabajadas);
+        while(auxHorasTrabajadas <= 0 || auxHorasTrabajadas > 10000)
+        {
+            printf("Error! Cantidad no valida! Reingrese (1-10.000): ");
+            scanf("%d", &auxHorasTrabajadas);
+        }
+        employee_setHorasTrabajadas(newEmpleado, auxHorasTrabajadas);
+        printf("\nIngrese el sueldo correspondiente (10.000 - 75.000): ");
+        scanf("%d", &auxSueldo);
+        while(auxSueldo < 10000 || auxSueldo > 75000)
+        {
+            printf("Error! Reingrese un valor correcto (10.000 - 75.000)!: ");
+            scanf("%d", &auxSueldo);
+        }
+        employee_setSueldo(newEmpleado, auxSueldo);
+        for (i = 0; i < ll_len(pArrayListEmployee); i++)
+        {
+            auxEmpleado = (Employee*) ll_get(pArrayListEmployee, i);
+            if(flag == 0 || auxEmpleado->id > idMax)
+            {
+                idMax = auxEmpleado->id;
+                flag = 1;
+            }
+        }
+        employee_setId(newEmpleado, idMax + 1);
+        if(!ll_add(pArrayListEmployee, newEmpleado))
+        {
+            isOk = 1;
         }
     }
-    employee_setId(newEmpleado, idMax + 1);
-    if(!ll_add(pArrayListEmployee, newEmpleado))
-    {
-        isOk = 1;
-    }
-
-
     return isOk;
 }
 
@@ -184,145 +178,141 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
     char auxName[50];
     Employee* auxEmp = NULL;
 
-    system("cls");
-    printf("------------------ NOMINA DE EMPLEADOS | UTN FRA ------------------\n\n");
-    printf("------------------         MODIFICACIONES        ------------------\n\n");
-    controller_ListEmployee(pArrayListEmployee);
-    printf("Ingrese el ID a modificar: ");
-    scanf("%d", &auxID);
-
-    for (i = 0; i < ll_len(pArrayListEmployee); i++)
+    if(pArrayListEmployee != NULL)
     {
-        auxEmp = (Employee*) ll_get(pArrayListEmployee, i);
-        if (auxID == auxEmp->id)
+        system("cls");
+        printf("------------------ NOMINA DE EMPLEADOS | UTN FRA ------------------\n\n");
+        printf("------------------         MODIFICACIONES        ------------------\n\n");
+        controller_ListEmployee(pArrayListEmployee);
+        printf("Ingrese el ID a modificar: ");
+        scanf("%d", &auxID);
+        for (i = 0; i < ll_len(pArrayListEmployee); i++)
         {
-            flag = 1;
-            index = i;
-            break;
-        }
-    }
-    if(flag == 0)
-    {
-        printf("No se ha encontrado el Empleado con la ID ingresada!\n");
-    }
-    else
-    {
-        do
-        {
-            switch(employee_modifyMenu(auxEmp->id, auxEmp->nombre, auxEmp->horasTrabajadas, auxEmp->sueldo))
+            auxEmp = (Employee*) ll_get(pArrayListEmployee, i);
+            if (auxID == auxEmp->id)
             {
-            case 1:
-                printf("Ingrese el nuevo nombre: ");
-                scanf("%s", auxName);
-
-                printf("Confirmar modificacion (y/n): ");
-                fflush(stdin);
-                scanf("%c", &option);
-                while (option != 'y' && option != 'n')
-                {
-                    printf("Opcion incorrecta! Ingrese 'y' o 'n': ");
-                    fflush(stdin);
-                    scanf("%c", &option);
-                }
-                if(option == 'y')
-                {
-                    auxEmp = (Employee*) ll_get(pArrayListEmployee, index);
-                    strlwr(auxName);
-                    auxName[0] = toupper(auxName[0]);
-                    strcpy(auxEmp->nombre, auxName);
-                    printf("Se ha realizado exitosamente la modificacion del Nombre!\n");
-                    isOk = 1;
-                }
-                else
-                {
-                    printf("Se ha cancelado la operacion correctamente!\n");
-                }
+                flag = 1;
+                index = i;
                 break;
-            case 2:
-                printf("Ingrese el nuevo sueldo (10.000 - 75.000): ");
-                scanf("%d", &newSalary);
-
-                while(newSalary < 10000 || newSalary > 75000)
-                {
-                    printf("Error! Reingrese un valor correcto (10.000 - 75.000)!: ");
-                    scanf("%d", &newSalary);
-                }
-
-                printf("Confirmar modificacion (y/n): ");
-                fflush(stdin);
-                scanf("%c", &option);
-                while (option != 'y' && option != 'n')
-                {
-                    printf("Opcion incorrecta! Ingrese 'y' o 'n': ");
-                    fflush(stdin);
-                    scanf("%c", &option);
-                }
-                if(option == 'y')
-                {
-                    auxEmp = (Employee*) ll_get(pArrayListEmployee, index);
-                    auxEmp->sueldo = newSalary;
-                    printf("Se ha realizado exitosamente la modificacion del Sueldo!\n");
-                    isOk = 1;
-                }
-                else
-                {
-                    printf("Se ha cancelado la operacion correctamente!\n");
-                }
-                break;
-            case 3:
-                printf("Ingrese la nueva cantidad de Horas Trabajadas (1 - 10.000): ");
-                scanf("%d", &newHours);
-
-                while(newHours < 1 || newHours > 10000)
-                {
-                    printf("Error! Reingrese un valor correcto (10.000 - 75.000)!: ");
-                    scanf("%d", &newHours);
-                }
-
-                printf("Confirmar modificacion (y/n): ");
-                fflush(stdin);
-                scanf("%c", &option);
-                while (option != 'y' && option != 'n')
-                {
-                    printf("Opcion incorrecta! Ingrese 'y' o 'n': ");
-                    fflush(stdin);
-                    scanf("%c", &option);
-                }
-                if(option == 'y')
-                {
-                    auxEmp = (Employee*) ll_get(pArrayListEmployee, index);
-                    auxEmp->horasTrabajadas = newHours;
-                    printf("Se ha realizado exitosamente la modificacion de las Horas Trabajadas!\n");
-                    isOk = 1;
-                }
-                else
-                {
-                    printf("Se ha cancelado la operacion correctamente!\n");
-                }
-                break;
-            case 4:
-                printf("Confirmar SALIDA (y/n): ");
-                fflush(stdin);
-                scanf("%c", &option);
-                while (option != 'y' && option != 'n')
-                {
-                    printf("Opcion incorrecta! Ingrese 'y' o 'n': ");
-                    fflush(stdin);
-                    scanf("%c", &option);
-                }
-                if(option == 'y')
-                {
-                    continuar = 1;
-                }
-                break;
-            default:
-                printf("Opcion seleccionada incorrecta! Reingrese.\n");
             }
-            system("pause");
         }
-        while(!continuar);
+        if(flag == 0)
+        {
+            printf("No se ha encontrado el Empleado con la ID ingresada!\n");
+        }
+        else
+        {
+            do
+            {
+                switch(employee_modifyMenu(auxEmp->id, auxEmp->nombre, auxEmp->horasTrabajadas, auxEmp->sueldo))
+                {
+                case 1:
+                    printf("Ingrese el nuevo nombre: ");
+                    scanf("%s", auxName);
+                    printf("Confirmar modificacion (y/n): ");
+                    fflush(stdin);
+                    scanf("%c", &option);
+                    while (option != 'y' && option != 'n')
+                    {
+                        printf("Opcion incorrecta! Ingrese 'y' o 'n': ");
+                        fflush(stdin);
+                        scanf("%c", &option);
+                    }
+                    if(option == 'y')
+                    {
+                        auxEmp = (Employee*) ll_get(pArrayListEmployee, index);
+                        strlwr(auxName);
+                        auxName[0] = toupper(auxName[0]);
+                        strcpy(auxEmp->nombre, auxName);
+                        printf("Se ha realizado exitosamente la modificacion del Nombre!\n");
+                        isOk = 1;
+                    }
+                    else
+                    {
+                        printf("Se ha cancelado la operacion correctamente!\n");
+                    }
+                    break;
+                case 2:
+                    printf("Ingrese el nuevo sueldo (10.000 - 75.000): ");
+                    scanf("%d", &newSalary);
+                    while(newSalary < 10000 || newSalary > 75000)
+                    {
+                        printf("Error! Reingrese un valor correcto (10.000 - 75.000)!: ");
+                        scanf("%d", &newSalary);
+                    }
+                    printf("Confirmar modificacion (y/n): ");
+                    fflush(stdin);
+                    scanf("%c", &option);
+                    while (option != 'y' && option != 'n')
+                    {
+                        printf("Opcion incorrecta! Ingrese 'y' o 'n': ");
+                        fflush(stdin);
+                        scanf("%c", &option);
+                    }
+                    if(option == 'y')
+                    {
+                        auxEmp = (Employee*) ll_get(pArrayListEmployee, index);
+                        auxEmp->sueldo = newSalary;
+                        printf("Se ha realizado exitosamente la modificacion del Sueldo!\n");
+                        isOk = 1;
+                    }
+                    else
+                    {
+                        printf("Se ha cancelado la operacion correctamente!\n");
+                    }
+                    break;
+                case 3:
+                    printf("Ingrese la nueva cantidad de Horas Trabajadas (1 - 10.000): ");
+                    scanf("%d", &newHours);
+                    while(newHours < 1 || newHours > 10000)
+                    {
+                        printf("Error! Reingrese un valor correcto (10.000 - 75.000)!: ");
+                        scanf("%d", &newHours);
+                    }
+                    printf("Confirmar modificacion (y/n): ");
+                    fflush(stdin);
+                    scanf("%c", &option);
+                    while (option != 'y' && option != 'n')
+                    {
+                        printf("Opcion incorrecta! Ingrese 'y' o 'n': ");
+                        fflush(stdin);
+                        scanf("%c", &option);
+                    }
+                    if(option == 'y')
+                    {
+                        auxEmp = (Employee*) ll_get(pArrayListEmployee, index);
+                        auxEmp->horasTrabajadas = newHours;
+                        printf("Se ha realizado exitosamente la modificacion de las Horas Trabajadas!\n");
+                        isOk = 1;
+                    }
+                    else
+                    {
+                        printf("Se ha cancelado la operacion correctamente!\n");
+                    }
+                    break;
+                case 4:
+                    printf("Confirmar SALIDA (y/n): ");
+                    fflush(stdin);
+                    scanf("%c", &option);
+                    while (option != 'y' && option != 'n')
+                    {
+                        printf("Opcion incorrecta! Ingrese 'y' o 'n': ");
+                        fflush(stdin);
+                        scanf("%c", &option);
+                    }
+                    if(option == 'y')
+                    {
+                        continuar = 1;
+                    }
+                    break;
+                default:
+                    printf("Opcion seleccionada incorrecta! Reingrese.\n");
+                }
+                system("pause");
+            }
+            while(!continuar);
+        }
     }
-
     return isOk;
 }
 
@@ -341,50 +331,52 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee)
     char resp;
     Employee* auxEmployee = NULL;
 
-    system("cls");
-    controller_ListEmployee(pArrayListEmployee);
-    printf("------------------ NOMINA DE EMPLEADOS | UTN FRA ------------------\n\n");
-    printf("------------------             BAJAS             ------------------\n\n");
+    if (pArrayListEmployee != NULL)
+    {
+        system("cls");
+        controller_ListEmployee(pArrayListEmployee);
+        printf("------------------ NOMINA DE EMPLEADOS | UTN FRA ------------------\n\n");
+        printf("------------------             BAJAS             ------------------\n\n");
 
-    printf("Ingrese el ID del empleado: ");
-    scanf("%d", &auxId);
-    for (i = 0; i < ll_len(pArrayListEmployee); i++)
-    {
-        auxEmployee = (Employee*) ll_get(pArrayListEmployee, i);
-        if(auxId == auxEmployee->id)
+        printf("Ingrese el ID del empleado: ");
+        scanf("%d", &auxId);
+        for (i = 0; i < ll_len(pArrayListEmployee); i++)
         {
-            flag = 1;
-            index = i;
-            break;
+            auxEmployee = (Employee*) ll_get(pArrayListEmployee, i);
+            if(auxId == auxEmployee->id)
+            {
+                flag = 1;
+                index = i;
+                break;
+            }
         }
-    }
-    if(!flag)
-    {
-        printf("\nNo se ha encontrado el Empleado con la ID ingresada!\n");
-    }
-    else
-    {
-        printf("\nConfirmar BAJA empleado (y/n): ");
-        fflush(stdin);
-        scanf("%c", &resp);
-        while(resp != 'y' && resp != 'n')
+        if(!flag)
         {
-            printf("Respuesta no valida! Ingrese (y/n): ");
+            printf("\nNo se ha encontrado el Empleado con la ID ingresada!\n");
+        }
+        else
+        {
+            printf("\nConfirmar BAJA empleado (y/n): ");
             fflush(stdin);
             scanf("%c", &resp);
-        }
-        if(resp == 'y')
-        {
-            ll_remove(pArrayListEmployee, index);
-            printf("\nSe ha eliminado exitosamente el Empleado de la lista!\n");
-            isOk = 1;
-        }
-        if(resp == 'n')
-        {
-            printf("\nSe ha cancelado la operacion!\n");
+            while(resp != 'y' && resp != 'n')
+            {
+                printf("Respuesta no valida! Ingrese (y/n): ");
+                fflush(stdin);
+                scanf("%c", &resp);
+            }
+            if(resp == 'y')
+            {
+                ll_remove(pArrayListEmployee, index);
+                printf("\nSe ha eliminado exitosamente el Empleado de la lista!\n");
+                isOk = 1;
+            }
+            if(resp == 'n')
+            {
+                printf("\nSe ha cancelado la operacion!\n");
+            }
         }
     }
-
     return isOk;
 }
 
@@ -393,7 +385,6 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee)
  * \param path char*                        | Nombre del archivo a leer y cargar
  * \param pArrayListEmployee LinkedList*    | LinkedList principal obtenido de main
  * \return isOk int  (1) - Muestra la lista de empleados (aunque este vacia)
- *
  */
 int controller_ListEmployee(LinkedList* pArrayListEmployee)
 {
@@ -403,7 +394,6 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
     system("cls");
     printf("------------------ NOMINA DE EMPLEADOS | UTN FRA ------------------\n\n");
     printf("   - ID -        - NOMBRE -      - HORAS TRABAJADAS -     - SUELDO -\n");
-
     for(i = 0; i < ll_len(pArrayListEmployee); i++)
     {
         pEmp = ll_get(pArrayListEmployee, i);
@@ -411,7 +401,6 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
         isOk = 1;
     }
     printf("\nTotal de Empleados: %d.\n", ll_len(pArrayListEmployee));
-
     return isOk;
 }
 
@@ -426,39 +415,39 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
 {
     int isOk = 0;
     int option;
-
-    system("cls");
-    printf("------------------ NOMINA DE EMPLEADOS | UTN FRA ------------------\n\n");
-    printf("------------------   ORDENAR LISTA DE EMPLEADOS  ------------------\n\n");
-
-    printf("Ordenar de manera...\n");
-    printf("1) Ascendente  (A-Z)\n");
-    printf("2) Descendente (Z-A)\n");
-    printf("3) Salir\n\n");
-    printf("Elija opcion: ");
-    scanf("%d", &option);
-    while(option < 0 || option > 3)
+    if (pArrayListEmployee != NULL)
     {
-        printf("Opcion seleccionada invalida, reingrese: ");
+        system("cls");
+        printf("------------------ NOMINA DE EMPLEADOS | UTN FRA ------------------\n\n");
+        printf("------------------   ORDENAR LISTA DE EMPLEADOS  ------------------\n\n");
+        printf("Ordenar de manera...\n");
+        printf("1) Ascendente  (A-Z)\n");
+        printf("2) Descendente (Z-A)\n");
+        printf("3) Salir\n\n");
+        printf("Elija opcion: ");
         scanf("%d", &option);
+        while(option < 0 || option > 3)
+        {
+            printf("Opcion seleccionada invalida, reingrese: ");
+            scanf("%d", &option);
+        }
+        switch (option)
+        {
+        case 1:
+            ll_sort(pArrayListEmployee, employee_sort, 1);
+            printf("Se ha ordenado la lista de empleados de manera ascendente!\n");
+            isOk = 1;
+            break;
+        case 2:
+            ll_sort(pArrayListEmployee, employee_sort, 0);
+            printf("Se ha ordenado la lista de empleados de manera descendente!\n");
+            isOk = 1;
+            break;
+        case 3:
+            return isOk;
+            break;
+        }
     }
-    switch (option)
-    {
-    case 1:
-        ll_sort(pArrayListEmployee, employee_sort, 1);
-        printf("Se ha ordenado la lista de empleados de manera ascendente!\n");
-        isOk = 1;
-        break;
-    case 2:
-        ll_sort(pArrayListEmployee, employee_sort, 0);
-        printf("Se ha ordenado la lista de empleados de manera descendente!\n");
-        isOk = 1;
-        break;
-    case 3:
-        return isOk;
-        break;
-    }
-
     return isOk;
 }
 

@@ -18,7 +18,7 @@
     10. Salir
 
     Author: Diaz, Lautaro Nicolas
-    Version: 2.0
+    Version: 2.1
 *****************************************************/
 
 int main()
@@ -146,6 +146,5 @@ int main()
         }
         system("pause");
     }while(follow == 'n');
-
     return 0;
 }
