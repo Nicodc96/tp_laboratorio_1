@@ -41,7 +41,6 @@ int ll_len(LinkedList* this)
     return returnAux;
 }
 
-
 /** \brief  Obtiene un nodo de la lista
  *
  * \param this LinkedList* Puntero a la lista
@@ -91,7 +90,7 @@ Node* test_getNode(LinkedList* this, int nodeIndex)
 static int addNode(LinkedList* this, int nodeIndex,void* pElement)
 {
     int returnAux = -1;
-    Node* newNode = (Node*) malloc(sizeof(Node)); // Nuevo Nodo
+    Node* newNode = (Node*) malloc(sizeof(Node));
     Node* auxNode = NULL;
     Node* auxNode2 = NULL;
     if (this != NULL && newNode != NULL && nodeIndex >= 0 && nodeIndex <= ll_len(this))
@@ -103,8 +102,8 @@ static int addNode(LinkedList* this, int nodeIndex,void* pElement)
             this->pFirstNode = newNode;
         } else
             {
-                auxNode = getNode(this, nodeIndex-1); // Nodo Anterior
-                auxNode2 = auxNode->pNextNode; // Nodo que intento pisar - Nodo Siguiente
+                auxNode = getNode(this, nodeIndex-1);
+                auxNode2 = auxNode->pNextNode;
                 auxNode->pNextNode = newNode;
                 newNode->pNextNode = auxNode2;
             }
@@ -128,7 +127,6 @@ int test_addNode(LinkedList* this, int nodeIndex,void* pElement)
     return addNode(this,nodeIndex,pElement);
 }
 
-
 /** \brief  Agrega un elemento a la lista
  * \param pList LinkedList* Puntero a la lista
  * \param pElement void* Puntero al elemento a ser agregado
@@ -139,7 +137,6 @@ int test_addNode(LinkedList* this, int nodeIndex,void* pElement)
 int ll_add(LinkedList* this, void* pElement)
 {
     int returnAux = -1;
-    // AVISO: Esta funcion debe permitir agregar pElements = NULL
     if (this != NULL)
     {
         if(!addNode(this, ll_len(this), pElement))
@@ -367,13 +364,6 @@ int ll_contains(LinkedList* this, void* pElement)
     if (this != NULL)
     {
         returnAux = ll_indexOf(this, pElement) == -1 ? 0:1;
-        /*
-            Llamo a indexOf y pregunto si encontró el elemento que solicito (pElement)
-            si me devuelve -1 significa que no encontró el elemento y utilizo el operador
-            ternario para definir ese retorno = 0 (que no contiene el element), en caso contrario,
-            se encontraria el indice que puede ser >= 1 entonces defino ese retorno = 1
-            (que contiene el elemento).
-        */
     }
     return returnAux;
 }
