@@ -101,7 +101,13 @@ int main()
                     }
                 break;
             case 6:
-                controller_ListEmployee(listaEmpleados);
+                if (checkText || checkBin)
+                {
+                    controller_ListEmployee(listaEmpleados);
+                } else
+                    {
+                        printf("\n------ Se debe cargar una lista antes de realizar esta accion! ------\n");
+                    }
                 break;
             case 7:
                 if(checkText || checkBin)

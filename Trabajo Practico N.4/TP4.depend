@@ -1,0 +1,29 @@
+# depslib dependency file v1.0
+1606163702 source:c:\users\nicolas\desktop\proyectos 2do parcial\tp4\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"LinkedList.h"
+
+1606149035 c:\users\nicolas\desktop\proyectos 2do parcial\tp4\linkedlist.h
+
+1606160051 source:c:\users\nicolas\desktop\proyectos 2do parcial\tp4\linkedlist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"LinkedList.h"
+
+1606173849 source:c:\users\nicolas\desktop\repositorios temporales\tp_laboratorio_1\trabajo practico n.4\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"LinkedList.h"
+
+1606173859 c:\users\nicolas\desktop\repositorios temporales\tp_laboratorio_1\trabajo practico n.4\linkedlist.h
+
+1606173815 source:c:\users\nicolas\desktop\repositorios temporales\tp_laboratorio_1\trabajo practico n.4\linkedlist.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"LinkedList.h"
+
